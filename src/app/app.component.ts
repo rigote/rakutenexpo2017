@@ -4,7 +4,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { Notifications } from '../pages/notifications/notifications';
+import { Speakers } from '../pages/speakers/speakers';
+import { Schedule } from '../pages/schedule/schedule';
+import { Sponsors } from '../pages/sponsors/sponsors';
+import { Favorite } from '../pages/favorite/favorite';
+import { HowToGet } from '../pages/how-to-get/how-to-get';
+import { TimeLineView } from '../pages/time-line-view/time-line-view';
+import { TimeLineCreate } from '../pages/time-line-create/time-line-create';
+import { TimeLineApproval } from '../pages/time-line-approval/time-line-approval';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,31 +22,32 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Home', component: HomePage, icon: 'home' },
+      { title: 'Como Chegar', component: HowToGet, icon: 'pin' },
+      { title: 'Agenda', component: Schedule, icon: 'time' },
+      { title: 'Palestrantes', component: Speakers, icon: 'contacts' },
+      { title: 'Favorito', component: Favorite, icon: 'star' },
+      { title: 'Patrocinadores', component: Sponsors, icon: 'people' },
+      { title: 'Time Line', component: TimeLineView, icon: 'git-merge' },
+      { title: 'Notificações', component: Notifications, icon: 'notifications' }      
     ];
 
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 }

@@ -1,16 +1,21 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
+    <span color="barcelona">
+      <img src="../assets/images/bannerEvento.png" alt="">
+    </span>
   </ion-header>
 
   <ion-content>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon [name]="p.icon"></ion-icon>
         {{p.title}}
       </button>
     </ion-list>
+
+    <span class="sideSponsor">
+      <span>Banner patrocinador</span>
+    </span>
   </ion-content>
 
 </ion-menu>
