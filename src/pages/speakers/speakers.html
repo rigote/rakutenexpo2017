@@ -5,9 +5,59 @@
     </button>
     <ion-title>Palestrantes</ion-title>
   </ion-navbar>
+  <ion-segment [(ngModel)]="trilhas">
+    <ion-segment-button class="marketing" value="marketing">
+      Marketing
+    </ion-segment-button>
+    <ion-segment-button class="inovacao" value="inovacao">
+      Inovação
+    </ion-segment-button>
+    <ion-segment-button class="varejo" value="varejo">
+      Varejo
+    </ion-segment-button>
+    <ion-segment-button class="solucoes" value="solucoes">
+      Soluções
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div [ngSwitch]="trilhas">
+    <ion-list *ngSwitchCase="'marketing'">
+      <ion-card>
+        <ion-item>
+          <img src="assets/images/person.png">
+          <div class="dataSpeaker">
+            <h2>Nome palestrante</h2>
+            <p>Business Development Evangelist in Google</p>
+          </div>
+          <div class="infoSpeaker">
+            <div class="dataInfo">
+              <span><ion-icon name="time"></ion-icon> 11:00</span>
+              <span class="separator"></span>
+              <span><ion-icon name="headset"></ion-icon> 05</span>
+              <span class="separator"></span>
+              <span><ion-icon name="star"></ion-icon></span>
+              <span class="separator"></span>
+              <span><ion-icon name="expand"></ion-icon></span>                            
+            </div>
+          </div>
+        </ion-item>
+      </ion-card>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'inovacao'" padding>
+      Inovação
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'varejo'" padding>
+      Varejo
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'solucoes'" padding>
+      Soluções
+    </ion-list>
+  </div>
 
 </ion-content>

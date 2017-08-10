@@ -1,3 +1,107 @@
-page-speakers {
+@import "../../theme/variables";
 
+page-speakers {
+    .segment-ios{
+        .segment-button{
+            border-color: #CCC;
+            &:first-of-type,&:not(:first-of-type){
+                border-radius: 0;
+            }
+            &.activated,
+            &.segment-activated{
+                &.marketing{
+                    border-color: color($colors-speakers, marketing);
+                    background: color($colors-speakers, marketing);
+                    color: color($colors, light);
+                }
+                &.inovacao{
+                    border-color: color($colors-speakers, inovacao);
+                    background: color($colors-speakers, inovacao);
+                    color: color($colors, light);
+                }
+                &.varejo{
+                    border-color: color($colors-speakers, varejo);
+                    background: color($colors-speakers, varejo);
+                    color: color($colors, light);
+                }
+                &.solucoes{
+                    border-color: color($colors-speakers, gestao);
+                    background: color($colors-speakers, gestao);
+                    color: color($colors, light);
+                }
+            }
+        }
+    }
+    
+    .segment-md{
+        .segment-button{
+            &.activated,
+            &.segment-activated{
+                &.marketing{
+                    border-color: color($colors-speakers, marketing);
+                    color: color($colors-speakers, marketing);
+                }
+                &.inovacao{
+                    border-color: color($colors-speakers, inovacao);
+                    color: color($colors-speakers, inovacao);
+                }
+                &.varejo{
+                    border-color: color($colors-speakers, varejo);
+                    color: color($colors-speakers, varejo);
+                }
+                &.solucoes{
+                    border-color: color($colors-speakers, gestao);
+                    color: color($colors-speakers, gestao);
+                }
+            }
+        }
+    }
+
+    ion-card{
+        ion-item{
+            padding-left: 0!important;
+            .item-inner{
+                padding: 0!important;
+            }
+            ion-label{
+                margin: 0 !important;
+                img{
+                    width: 80px;
+                    height: 80px;
+                    //border-radius: 50%;
+                    float: left;
+                    z-index: 9999;
+                    background: #FFF;
+                }
+                .dataSpeaker{
+                    float: left;
+                    width: 70%;
+                    margin: 10px 0 0 9px;
+                    h2,p{
+                        float: left;
+                        white-space: normal;
+                    }
+                }
+                .infoSpeaker{
+                    float: left;
+                    width: 100%;
+                    bottom: 0;
+                    height: 40px;
+                    border-top: 1px solid #CCC;
+                    .dataInfo{
+                        widows: 100%;
+                        text-align: right;
+                        line-height: 40px;
+                        span{
+                            padding: 0 5px;
+                            &.separator{
+                                padding: 2px;
+                                border-left: 1px dashed #CCC;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

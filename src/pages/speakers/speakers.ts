@@ -6,6 +6,8 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'speakers.html',
 })
 export class Speakers {
+  
+  trilhas: string = "marketing";
 
   constructor(public navCtrl: NavController) {
   }
