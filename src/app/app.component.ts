@@ -11,8 +11,6 @@ import { Sponsors } from '../pages/sponsors/sponsors';
 import { Favorite } from '../pages/favorite/favorite';
 import { HowToGet } from '../pages/how-to-get/how-to-get';
 import { TimeLineView } from '../pages/time-line-view/time-line-view';
-//import { TimeLineCreate } from '../pages/time-line-create/time-line-create';
-//import { TimeLineApproval } from '../pages/time-line-approval/time-line-approval';
 
 @Component({
   templateUrl: 'app.html'

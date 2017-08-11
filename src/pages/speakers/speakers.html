@@ -27,8 +27,8 @@
     <ion-list *ngSwitchCase="'marketing'">
       <ion-card>
         <ion-item>
-          <img src="assets/images/person.png">
-          <div class="dataSpeaker">
+          <img src="assets/images/person.png" (click)="openProfile()">
+          <div class="dataSpeaker" (click)="openProfile()">
             <h2>Nome palestrante</h2>
             <p>Business Development Evangelist in Google</p>
           </div>
@@ -38,9 +38,7 @@
               <span class="separator"></span>
               <span><ion-icon name="headset"></ion-icon> 05</span>
               <span class="separator"></span>
-              <span><ion-icon name="star"></ion-icon></span>
-              <span class="separator"></span>
-              <span><ion-icon name="expand"></ion-icon></span>                            
+              <span><ion-icon name="star"></ion-icon></span>                         
             </div>
           </div>
         </ion-item>

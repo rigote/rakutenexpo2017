@@ -1,0 +1,29 @@
+page-profile {
+    span{
+        margin: 0 15px;
+        float: left;
+        width: 100%;
+        img{
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin-right: 15px;
+        }
+        h2,h3,p,small{
+            width: 63%;
+            float: left;
+            white-space: normal;
+        }
+        h2{
+            font-size: 18px;
+            margin: 10px 0 0;
+        }
+    }
+    ion-card{
+        small,p{
+            margin: 10px !important;
+            display: inline-block;
+            text-align: justify;
+        }
+    }
+}
