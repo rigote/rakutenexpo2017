@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
+
+import { TakePicture } from '../take-picture/take-picture';
 
 @Component({
   selector: 'page-time-line-view',
@@ -7,11 +9,16 @@ import { NavController } from 'ionic-angular';
 })
 export class TimeLineView {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TimeLineView');
+  }
+
+  modalSendPhoto(){
+    let modal = this.modalCtrl.create(TakePicture);
+    modal.present();
   }
 
 }

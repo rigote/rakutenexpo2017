@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar color="rakuten">
+      <ion-buttons end>
+        <button ion-button icon-only (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Tirar foto</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content>
+    <ion-card>
+      <video id="video" width="100%" autoplay></video>
+      <canvas id="canvas" style="display:none;"></canvas>
+    </ion-card>
+    <div padding>
+      <button ion-button block large outline (click)="createPost()" color="rakuten">Tirar Foto</button>
+    </div>
+  </ion-content>
+  

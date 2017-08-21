@@ -66,8 +66,8 @@ page-speakers {
             ion-label{
                 margin: 0 !important;
                 img{
-                    width: 80px;
-                    height: 80px;
+                    width: 110px;
+                    height: 140px;
                     //border-radius: 50%;
                     float: left;
                     z-index: 9999;
@@ -75,21 +75,28 @@ page-speakers {
                 }
                 .dataSpeaker{
                     float: left;
-                    width: 70%;
-                    margin: 10px 0 0 5px;
+                    width: 65%;
+                    margin: 5px 0 0 5px;
                     h2,p{
                         float: left;
                         white-space: normal;
                         display: inline-block;
                         width: 100%;
                     }
+                    h2{
+                        font-size: 16px;
+                    }
+                    p{
+                        font-size: 12px;
+                    }
                 }
                 .infoSpeaker{
-                    float: left;
+                    position: absolute;
                     width: 100%;
                     bottom: 0;
                     height: 40px;
                     border-top: 1px solid #CCC;
+                    z-index: -9999;
                     .dataInfo{
                         width: 100%;
                         text-align: right;

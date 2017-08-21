@@ -14,6 +14,7 @@ import { TimeLineView } from '../pages/time-line-view/time-line-view';
 import { TimeLineCreate } from '../pages/time-line-create/time-line-create';
 import { TimeLineApproval } from '../pages/time-line-approval/time-line-approval';
 import { Profile } from '../pages/profile/profile';
+import { TakePicture } from '../pages/take-picture/take-picture';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -42,7 +43,8 @@ const firebaseConfig = {
     TimeLineView,
     TimeLineCreate,
     TimeLineApproval,
-    Profile
+    Profile,
+    TakePicture
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ const firebaseConfig = {
     TimeLineView,
     TimeLineCreate,
     TimeLineApproval,
-    Profile
+    Profile,
+    TakePicture
   ],
   providers: [
     StatusBar,
