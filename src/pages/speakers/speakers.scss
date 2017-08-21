@@ -76,10 +76,12 @@ page-speakers {
                 .dataSpeaker{
                     float: left;
                     width: 70%;
-                    margin: 10px 0 0 9px;
+                    margin: 10px 0 0 5px;
                     h2,p{
                         float: left;
                         white-space: normal;
+                        display: inline-block;
+                        width: 100%;
                     }
                 }
                 .infoSpeaker{
@@ -89,7 +91,7 @@ page-speakers {
                     height: 40px;
                     border-top: 1px solid #CCC;
                     .dataInfo{
-                        widows: 100%;
+                        width: 100%;
                         text-align: right;
                         line-height: 40px;
                         span{

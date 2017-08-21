@@ -1,6 +1,6 @@
 page-profile {
     span{
-        margin: 0 15px;
+        margin: 10px 15px;
         float: left;
         width: 100%;
         img{
@@ -24,6 +24,9 @@ page-profile {
             margin: 10px !important;
             display: inline-block;
             text-align: justify;
+        }
+        p{
+            font-size: 12px !important;
         }
     }
 }
