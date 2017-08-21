@@ -21,7 +21,7 @@ $app-direction: ltr;
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
+$text-shadow: 1px 1px 2px rgb(25, 24, 24);
 
 
 // Named Color Variables
@@ -40,7 +40,14 @@ $colors: (
   dark:       #222,
   rakuten:    #C00303,
   barcelona:  #01245C,
-  viber:      #6B64AA
+  viber:      #6B64AA,
+  star:       #FFA726,
+  
+  //Cores das guias
+  marketing:  #E91E63,
+  inovacao:   #7986CB,
+  varejo:     #00ACC1,
+  gestao:     #FFA726
 );
 
 $colors-speakers: (
