@@ -4,6 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { Login } from '../pages/login/login';
+import { Signup } from '../pages/signup/signup';
 import { Notifications } from '../pages/notifications/notifications';
 import { Speakers } from '../pages/speakers/speakers';
 import { Schedule } from '../pages/schedule/schedule';
@@ -18,7 +20,7 @@ import { TimeLineView } from '../pages/time-line-view/time-line-view';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = Login;
 
   pages: Array<{title: string, component: any, icon: string}>;
 

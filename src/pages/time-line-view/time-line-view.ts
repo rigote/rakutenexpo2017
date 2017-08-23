@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { TakePicture } from '../take-picture/take-picture';
+import { TimeLineApproval } from '../time-line-approval/time-line-approval';
 
 @Component({
   selector: 'page-time-line-view',
@@ -18,6 +19,11 @@ export class TimeLineView {
 
   modalSendPhoto(){
     let modal = this.modalCtrl.create(TakePicture);
+    modal.present();
+  }
+
+  modalEditPost(){
+    let modal = this.modalCtrl.create(TimeLineApproval);
     modal.present();
   }
 

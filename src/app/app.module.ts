@@ -4,6 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { Login } from '../pages/login/login';
+import { Signup } from '../pages/signup/signup';
 import { Notifications } from '../pages/notifications/notifications';
 import { Speakers } from '../pages/speakers/speakers';
 import { Schedule } from '../pages/schedule/schedule';
@@ -19,15 +21,16 @@ import { TakePicture } from '../pages/take-picture/take-picture';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB6Eaac9Vgs0HO1QcT7XLkghceapTYYcXI",
-  authDomain: "rakuten-expo-2016.firebaseapp.com",
-  databaseURL: "https://rakuten-expo-2016.firebaseio.com",
-  storageBucket: "rakuten-expo-2016.appspot.com"
+  apiKey: "AIzaSyCfstsRMGc4EdclUKs3iKULrwEvoVn9IFs",
+  authDomain: "rakutenexpo2017.firebaseapp.com",
+  databaseURL: "https://rakutenexpo2017.firebaseio.com",
+  storageBucket: "rakutenexpo2017.appspot.com"
 };
 
 @NgModule({
@@ -44,7 +47,9 @@ const firebaseConfig = {
     TimeLineCreate,
     TimeLineApproval,
     Profile,
-    TakePicture
+    TakePicture,
+    Login,
+    Signup
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,7 @@ const firebaseConfig = {
     HttpModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -67,7 +73,9 @@ const firebaseConfig = {
     TimeLineCreate,
     TimeLineApproval,
     Profile,
-    TakePicture
+    TakePicture,
+    Login,
+    Signup
   ],
   providers: [
     StatusBar,

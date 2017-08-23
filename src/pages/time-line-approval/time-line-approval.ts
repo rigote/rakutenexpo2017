@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ViewController, ModalController } from 'ionic-angular';
 
 @Component({
   selector: 'page-time-line-approval',
@@ -7,11 +7,15 @@ import { NavController } from 'ionic-angular';
 })
 export class TimeLineApproval {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TimeLineApproval');
+  }
+
+  dismiss(){
+    this.viewCtrl.dismiss();
   }
 
 }
