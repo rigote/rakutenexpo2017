@@ -10,85 +10,184 @@ import { FirebaseProvider } from './../../providers/firebase/firebase';
 export class Speakers {
   
   trilhas: string = "marketing";
-
   pages: Array<{ title: string, component: any }>;
 
-  public dataPalestrante: Array<any> = new Array<any>();
-  public dataPalestra: Array<any> = new Array<any>();
-  public dataTrilha: Array<any> = new Array<any>();
-  public dataAgendamento: Array<any> = new Array<any>();
+  public dataPalestrante: Array<any>;
+  public dataPalestra: Array<any>;
+  public dataTrilha: Array<any>;
+  public dataAgendamento: Array<any>;
+  public _palestrantes: Array<any> = [];
+  public _palestras: Array<any> = [];
+  public _trilhas: Array<any> = [];
+  public _agendamentos: Array<any> = [];
   private _uuID: any;
   public favoriteFilterSelected: boolean = false;
-  public tabs: Array<boolean> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider) {
-    var root = this; 
+    var root = this;
+    //this._uuID = typeof Device.device.uuid == 'undefined' ? '123456' : Device.device.uuid;
+    this._uuID = '123';
 
-    this.firebaseProvider.getAllPalestrantes().subscribe(palestrantes => {
-      palestrantes.forEach(palestrante => {
-        root.dataPalestrante.push(palestrante);
-      });
-    });    
+    this.firebaseProvider.getAllPalestrantes().on('value', (data) => {
+      root.dataPalestrante = data.val();      
+      root.initializeItems(1);
+    });
+
+    this.firebaseProvider.getAllPalestras().on('value', (data) => {
+      root.dataPalestra = data.val();
+      root.initializeItems(2);
+    });
+
+    this.firebaseProvider.getAllTrilhas().on('value', (data) => {
+      root.dataTrilha = data.val();
+      root.initializeItems(3);
+    });
+
+    this.firebaseProvider.getAgendamentoByUUID(root._uuID).on('value', (data) => {
+      root.dataAgendamento = data.val();
+      root.initializeItems(4);
+    });
+  }
+
+  private initializeItems(type: number) {
+    var result = [];    
     
-    this.firebaseProvider.getAllPalestras().subscribe(palestras => {
-      palestras.forEach(palestra => {
-        root.dataPalestra.push(palestra);
-      });
-    });
+    switch (type) {
+      case 1:
+        for (var palestrante in this.dataPalestrante) {        
+          result.push({
+            key: palestrante,
+            nome: this.dataPalestrante[palestrante].nome,
+            ocupacao: this.dataPalestrante[palestrante].ocupacao,
+            descricao: this.dataPalestrante[palestrante].descricao,
+            foto: this.dataPalestrante[palestrante].foto,
+            index: this.dataPalestrante[palestrante].index
+          });        
+        }
 
-    this.firebaseProvider.getAllTrilhas().subscribe(trilhas => {
-      trilhas.forEach(trilha => {
-        root.dataTrilha.push(trilha);
-      });
-    });
+        //this._palestrantes = _.sortBy(result, function(obj){ return Math.min(obj.index); });
+        this._palestrantes = result;
+        break;
+      case 2:
+        for (var palestra in this.dataPalestra) {        
+          result.push({
+            key: palestra,
+            index: this.dataPalestra[palestra].index,
+            titulo: this.dataPalestra[palestra].titulo,
+            descricao: this.dataPalestra[palestra].descricao,
+            horario: this.dataPalestra[palestra].horario,
+            trilhaID: this.dataPalestra[palestra].trilhaID,
+            palestranteIDs: this.dataPalestra[palestra].palestranteIDs
+          });        
+        }
+        
+        //this._palestras = _.sortBy(result, function(obj){ return Math.min(obj.index); });
+        this._palestras = result;
+        break;
+      case 3:
+        for (var trilha in this.dataTrilha) {
+          result.push({
+            key: trilha,
+            canal: this.dataTrilha[trilha].canal,
+            nome: this.dataTrilha[trilha].nome,
+            alias: this.dataTrilha[trilha].alias
+          });   
+        }
 
-    //this.dataAgendamento = this.firebaseProvider.getAgendamentoByUUID(root._uuID).subscribe(agendamentos => {
-    //   agendamentos.forEach(agendamento => {
-    //     this.dataPalestrante.push(agendamento);
-    //   });
-    // });
+        this._trilhas = result;
+        break;
+      case 4:
+        for (var agendamento in this.dataAgendamento) {        
+          result.push({
+            key: agendamento,
+            deviceID: this.dataAgendamento[agendamento].deviceID,
+            palestraID: this.dataAgendamento[agendamento].palestraID //palestranteID
+          });        
+        }
+
+        this._agendamentos = result;
+        break;
+    }
+    
+  }
+
+  public ChangeTab(value: string){
+    this.trilhas = value;
+  }
+
+  public getPalestrantes(trilhaID: any): Array<any> {
+    let palestrantes: Array<any> = [];
+    let result: Array<any> = [];
+
+    for(let i: number = 0; i < this._palestras.length; i++) {
+      if (this._palestras[i].trilhaID == trilhaID) {
+        for (let j: number = 0; j < this._palestras[i].palestranteIDs.length; j++) {
+          if (palestrantes.indexOf(this._palestras[i].palestranteIDs[j]) == -1) {
+            palestrantes.push(this._palestras[i].palestranteIDs[j]);
+          }
+        }        
+      }
+    }
+
+    for(let i: number = 0; i < this._palestrantes.length; i++) {
+      for (let j: number = 0; j < palestrantes.length; j++) {
+        if (this._palestrantes[i].key == palestrantes[j]) {
+          result.push(this._palestrantes[i]);
+          break;
+        }
+      }      
+    }
+    return result;    
   }
 
   public getItems(ev: any) {  
-    // this.favoriteFilterSelected = false;  
-    // let val = ev.target.value;
+    this.favoriteFilterSelected = false;  
+    this.initializeItems(1);
+    this.initializeItems(2);
+    this.initializeItems(3);
+    this.initializeItems(4);
+    let val = ev.target.value;
 
-    // if (val && val.trim() != '') {
-    //   this.items = this.items.filter((item) => {
-    //     return (item.nome.toLowerCase().indexOf(val.toLowerCase()) > -1) || 
-    //               (item.descricao.toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-    //                 (item.ocupacao.toLowerCase().indexOf(val.toLowerCase()) > -1);
-    //   })
-    // }
+    if (val && val.trim() != '') {
+      this._palestrantes = this._palestrantes.filter((item) => {
+        return (item.nome.toLowerCase().indexOf(val.toLowerCase()) > -1) || 
+                  (item.descricao.toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+                    (item.ocupacao.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 
   public toggleFilterFavorite() {
-    // if (this.favoriteFilterSelected) {
-    //   this.favoriteFilterSelected = false;
-    // } else {      
-    //   let _items: Array<any> = this.items;      
+    if (this.favoriteFilterSelected) {
+      this.favoriteFilterSelected = false;
+      this.initializeItems(1);
+      this.initializeItems(2);
+      this.initializeItems(3);
+      this.initializeItems(4);
+    } else {      
+      let palestrantes: Array<any> = this._palestrantes;      
       
-    //   this.favoriteFilterSelected = true;
-    //   this.items = [];
+      this.favoriteFilterSelected = true;
+      this._palestrantes = [];
 
-    //   for (var i in this.itemsAgendamento) {
-    //     for (var j in _items) {
-    //       if (this.itemsAgendamento[i].palestraID == _items[j].key) {
-    //         this.items.push(_items[j]);
-    //       }
-    //     }
-    //   }
-    // }
+      for (var agendamento in this._agendamentos) {
+        for (var palestrante in palestrantes) {
+          if (this._agendamentos[agendamento].palestraID == palestrantes[palestrante].key) {
+            this._palestrantes.push(palestrantes[palestrante]);
+          }
+        }
+      }
+    }
   }
 
   public toggleLecture(item: any) {
 
-    /*let palestraIDs: Array<any> = [];
+    let palestraIDs: Array<any> = [];
 
-    for (var i in this.itemsPalestra) {  
-      if (typeof this.itemsPalestra[i].palestranteIDs != 'undefined' && this.itemsPalestra[i].palestranteIDs.indexOf(item.key) > -1) {
-        for (var j in this.itemsPalestra[i].palestranteIDs) {
-          palestraIDs.push(this.itemsPalestra[i].palestranteIDs[j]);
+    for (var palestra in this._palestras) {  
+      if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(item.key) > -1) {
+        for (var palestrante in this._palestras[palestra].palestranteIDs) {
+          palestraIDs.push(this._palestras[palestra].palestranteIDs[palestrante]);
         }        
       }
     }
@@ -96,32 +195,32 @@ export class Speakers {
     let scheduled: boolean = false;
     let key: any;
 
-    for (var i in this.itemsAgendamento) {
-      if (this.itemsAgendamento[i].deviceID == this._uuID && this.itemsAgendamento[i].palestraID == palestraIDs[0]) {
+    for (var agendamento in this._agendamentos) {
+      if (this._agendamentos[agendamento].deviceID == this._uuID && this._agendamentos[agendamento].palestraID == palestraIDs[0]) {
         scheduled = true;
-        key = this.itemsAgendamento[i].key;
+        key = this._agendamentos[agendamento].key;
         break;
       }
     }
 
     if (scheduled) {
-      this._fire.removeAgendamento(key);
+      this.firebaseProvider.removeAgendamento(key);
     }
     else {
-      this._fire.addAgendamento({
+      this.firebaseProvider.addAgendamento({
         deviceID: this._uuID,
         palestraID: palestraIDs[0]
       });
-    }*/
-    
+    }
   }
 
   public getLectureTime(key): any {
     let result: string = "";
-    
-    for (let i: number = 0; i < this.dataPalestra.length; i++) {
-      if (typeof this.dataPalestra[i].palestranteIDs != 'undefined' && this.dataPalestra[i].palestranteIDs.indexOf(key) > -1) {
-        result = this.dataPalestra[i].horario;
+
+    for (var palestra in this._palestras) {  
+      if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(key) > -1) {
+        result = this._palestras[palestra].horario;
+        break;
       }
     }
 
@@ -129,81 +228,35 @@ export class Speakers {
   }
 
   public getLecture(key): any {
-    let result: any;
+    let result: string = "";
 
-    for (let i: number = 0; i < this.dataPalestra.length; i++) {
-      if (typeof this.dataPalestra[i].palestranteIDs != 'undefined' && this.dataPalestra[i].palestranteIDs.indexOf(key) > -1) {        
-        result = this.dataPalestra[i];
+    for (var palestra in this._palestras) {  
+      if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(key) > -1) {
+        result = this._palestras[palestra];
+        break;
       }
     }
-    
+
     return result;
   }
 
   public getChannel(key): any {
     let result: string = "";
 
-    var root = this;
-
-    for (let j: number = 0; j < this.dataPalestra.length; j++) {
-      if (typeof this.dataPalestra[j].palestranteIDs != 'undefined' && this.dataPalestra[j].palestranteIDs.indexOf(key) > -1) {
-        for (let i: number = 0; i < root.dataTrilha.length; i++) {
-          if (root.dataTrilha[i].key == this.dataPalestra[j].trilhaID) {
-            result = root.dataTrilha[i].canal;
-          }  
-        }
-      }
-    }
-    
-    return result;
-  }
-
-  public getPalestrantes(trilhaID: any): Array<any> {
-    let palestrantes: Array<any> = [];
-    let result: Array<any> = [];
-    
-    for (let i: number; i < this.dataPalestra.length; i++) {
-      if (this.dataPalestra[i].trilhaID == trilhaID) {
-        for (let j: number = 0; j < this.dataPalestra[i].palestranteIDs.length; j++) {
-          if (palestrantes.indexOf(this.dataPalestra[i].palestranteIDs[j]) == -1) {
-            palestrantes.push(this.dataPalestra[i].palestranteIDs[j]);
-          }
+    for (var palestra in this._palestras) {  
+      if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(key) > -1) {
+        for (var trilha in this._trilhas) {
+          if (this._trilhas[trilha].key == this._palestras[palestra].trilhaID) {
+            result = this._trilhas[trilha].canal;
+            break;
+          }            
         }        
-      }      
-    }
-
-    for(let i: number = 0; i < this.dataPalestrante.length; i++) {
-      for (let j: number = 0; j < this.dataPalestrante[i].length; j++) {
-        if (this.dataPalestrante[i].key == palestrantes[j]) {
-          result.push(this.dataPalestrante[i]);
-          break;
-        }
-      }
-    }
-
-    return result;    
-  }
-
-  public isScheduled(item) {
-    let result: boolean = false;
-    let palestraIDs: Array<any> = [];
-
-    for(let i: number = 0; i < this.dataPalestra.length; i++) {
-      if (typeof this.dataPalestra[i].palestranteIDs != 'undefined' && this.dataPalestra[i].palestranteIDs.indexOf(item.key) > -1) {
-        for (var j in this.dataPalestra[i].palestranteIDs) {
-          palestraIDs.push(this.dataPalestra[i].palestranteIDs[j]);
-        }        
-      }
-    }
-
-    for(let i: number = 0; i < this.dataAgendamento.length; i++) {
-      if (palestraIDs.indexOf(this.dataAgendamento[i].palestraID) > -1 && this._uuID) {
-        result = true;
+        break;
       }
     }
 
     return result;
-  } 
+  }
 
   ionViewDidLoad() {
     

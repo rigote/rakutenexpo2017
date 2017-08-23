@@ -5,19 +5,18 @@
     </button>
     <ion-title>Palestrantes</ion-title>
   </ion-navbar>
-  <ion-segment [(ngModel)]="trilhas" *ngIf="dataTrilha">
-    <ion-segment-button *ngFor="let trilha of dataTrilha" class="{{trilha.alias}} segment-button" value="{{trilha.alias}}">
+  <ion-segment [(ngModel)]="trilhas">
+    <ion-segment-button *ngFor="let trilha of _trilhas" class="{{trilha.alias}} segment-button" (click)="ChangeTab(trilha.alias)">
       {{trilha.nome}}
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 
-
 <ion-content>
   <div [ngSwitch]="trilhas">
-    <div *ngFor="let trilha of dataTrilha">
+    <div *ngFor="let trilha of _trilhas">
       <ion-list *ngSwitchCase="trilha.alias">
-        <ion-card *ngFor="let palestrante of dataPalestrante">
+        <ion-card *ngFor="let palestrante of getPalestrantes(trilha.key)">
           <ion-item>
             <img src="{{palestrante.foto}}" (click)="openProfile(palestrante)">
             <div class="dataSpeaker" (click)="openProfile(palestrante)">
