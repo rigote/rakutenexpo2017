@@ -12,7 +12,7 @@ export class Profile {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.profile = this.navParams.get('profile');
-    //this.lecture = this.navParams.get('lecture');
+    this.lecture = this.navParams.get('lecture');
   }
 
   ionViewDidLoad() {

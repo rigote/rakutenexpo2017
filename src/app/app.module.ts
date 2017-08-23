@@ -19,9 +19,11 @@ import { TakePicture } from '../pages/take-picture/take-picture';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireModule } from 'angularfire2';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+// import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from '../providers/firebase/firebase';
+
+import firebase from 'firebase';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB6Eaac9Vgs0HO1QcT7XLkghceapTYYcXI",
@@ -50,8 +52,8 @@ const firebaseConfig = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    // AngularFireDatabaseModule,
+    // AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -76,4 +78,10 @@ const firebaseConfig = {
     FirebaseProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor(){
+    firebase.initializeApp(firebaseConfig);
+  }
+
+}
