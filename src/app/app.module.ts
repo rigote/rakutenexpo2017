@@ -21,14 +21,9 @@ import { TakePicture } from '../pages/take-picture/take-picture';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
-<<<<<<< HEAD
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-=======
-// import { AngularFireDatabaseModule } from 'angularfire2/database';
-// import { AngularFireModule } from 'angularfire2';
->>>>>>> 2d24d23067b37ad9dca1f708c27d787841a95d0f
 import { FirebaseProvider } from '../providers/firebase/firebase';
 
 import firebase from 'firebase';
