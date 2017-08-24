@@ -40,3 +40,7 @@ span{
         display: inline-block;
     }
 }
+
+.auto-scroll .scroll-content {
+    overflow: auto;
+  }
