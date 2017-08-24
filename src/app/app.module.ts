@@ -29,10 +29,12 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
 import firebase from 'firebase';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCfstsRMGc4EdclUKs3iKULrwEvoVn9IFs",
-  authDomain: "rakutenexpo2017.firebaseapp.com",
-  databaseURL: "https://rakutenexpo2017.firebaseio.com",
-  storageBucket: "rakutenexpo2017.appspot.com"
+  apiKey: "AIzaSyB6Eaac9Vgs0HO1QcT7XLkghceapTYYcXI",
+  authDomain: "rakuten-expo-2016.firebaseapp.com",
+  databaseURL: "https://rakuten-expo-2016.firebaseio.com",
+  projectId: "rakuten-expo-2016",
+  storageBucket: "rakuten-expo-2016.appspot.com",
+  messagingSenderId: "610432552266"
 };
 
 @NgModule({
@@ -57,14 +59,9 @@ const firebaseConfig = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-<<<<<<< HEAD
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
-=======
-    // AngularFireDatabaseModule,
-    // AngularFireModule.initializeApp(firebaseConfig)
->>>>>>> 2d24d23067b37ad9dca1f708c27d787841a95d0f
   ],
   bootstrap: [IonicApp],
   entryComponents: [
