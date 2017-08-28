@@ -36,7 +36,7 @@ export class FirebaseProvider {
     }
 
     public getAllPalestras(): any {
-        return this._palestras.orderByKey();
+        return this._palestras.orderByChild('index');
     }
 
     public getTrilha(id: any): any {

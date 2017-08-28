@@ -51,8 +51,6 @@ export class Schedule {
           });        
         }
 
-        //this.storage.setJson('palestras', result);
-        //this.palestras = _.sortBy(result, function(obj){ return Math.min(obj.index); });
         this.palestras = result;
       break;
       case 2:
@@ -67,7 +65,6 @@ export class Schedule {
           });        
         }
 
-        //this.storage.setJson('palestrantes', result);
         this.palestrantes = result;
       break;
       case 3:
@@ -80,7 +77,6 @@ export class Schedule {
           });        
         }
 
-        //this.storage.setJson('trilhas', result);
         this.trilhas = result;
       break;
     }    
