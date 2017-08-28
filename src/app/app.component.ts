@@ -20,7 +20,7 @@ import { TimeLineView } from '../pages/time-line-view/time-line-view';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Login;
+  rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 

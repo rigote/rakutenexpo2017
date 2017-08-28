@@ -267,12 +267,3 @@ export class Speakers {
   }
 
 }
-
-export class SpeakerModel
-{
-  public descricao: string;
-  public foto: string;
-  public index: number;
-  public nome: string;  
-  public ocupacao: string;  
-}
