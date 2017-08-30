@@ -8,16 +8,16 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class TimeLineApproval {
 
-  public posts: any[] = [];
+  posts: FirebaseListObservable<any[]>;
 
   constructor(public viewCtrl: ViewController, public loadingCtrl: LoadingController, db: AngularFireDatabase) {
     let loader = this.loadingCtrl.create({ content: "Carregando..." });
     loader.present();
 
-    db.list('/posts').subscribe(posts => {
-      this.posts = posts.reverse();
-      loader.dismiss();
-    });
+    this.posts = db.list('/posts');
+
+    loader.dismiss();
+
   }
 
   ionViewDidLoad() {
@@ -28,12 +28,12 @@ export class TimeLineApproval {
     this.viewCtrl.dismiss();
   }
 
-  delete(){
-    console.log('Deletando corretamente.');
+  delete(key: string){
+    return this.posts.remove(key);
   }
 
-  approve(){
-    console.log('Aprovando corretamente.');
+  approve(key: string, status: string){
+    return this.posts.update(key, {status: status})
   }
 
 }

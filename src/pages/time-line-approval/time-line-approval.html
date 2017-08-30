@@ -11,7 +11,7 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let post of posts">
+  <ion-card *ngFor="let post of posts | async">
     <div *ngIf="post.status == 'pendente'">
       <!-- <ion-item>
       <ion-avatar item-start>
@@ -22,7 +22,7 @@
     </ion-item> -->
       <img src="{{post.image}}" class="{{post.filter}}">
       <ion-card-content>
-        <p>{{post.message}}</p>
+        <p>{{post.$key}}</p>
       </ion-card-content>
       <ion-list>
         <ion-item-sliding>
@@ -30,12 +30,12 @@
             <h3>Reprovar / Aprovar</h3>
           </ion-item>
           <ion-item-options side="left">
-            <button ion-button color="danger" (click)="delete()">
+            <button ion-button color="danger" (click)="delete(post)">
             <ion-icon name="thumbs-down"></ion-icon>
           </button>
           </ion-item-options>
           <ion-item-options side="right">
-            <button ion-button color="secondary" (click)="approve()">
+            <button ion-button color="secondary" (click)="approve(post,'aprovado')">
             <ion-icon name="thumbs-up"></ion-icon>
           </button>
           </ion-item-options>

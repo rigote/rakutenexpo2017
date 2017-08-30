@@ -1,3 +1,4 @@
+import { Crop } from '@ionic-native/crop';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -92,6 +93,8 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     Camera,
+    Device,
+    Crop,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider
   ]
