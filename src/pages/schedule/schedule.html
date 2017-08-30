@@ -26,7 +26,7 @@
           <span class="iconCanal" *ngIf="data.trilhaID != ''"><ion-icon name="headset"></ion-icon> {{getTrilhaData(data.trilhaID,1)}}</span>
         </ion-item>
         <ion-item-options side="right">
-          <button ion-button color="star">
+          <button ion-button color="star" (click)="toggleLecture(data.palestrantes)">
             <ion-icon name="star"></ion-icon>
           </button>
         </ion-item-options>

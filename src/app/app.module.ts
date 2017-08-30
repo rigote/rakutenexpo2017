@@ -25,6 +25,7 @@ import { HttpModule } from '@angular/http';
 // import { AngularFireDatabaseModule } from 'angularfire2/database';
 // import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
+import { Device } from '@ionic-native/device';
 
 import firebase from 'firebase';
 
@@ -82,6 +83,7 @@ const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider
   ]
