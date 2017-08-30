@@ -11,35 +11,36 @@
 
 
 <ion-content>
-  <ion-card>
-    <ion-item>
+  <ion-card *ngFor="let post of posts">
+    <div *ngIf="post.status == 'pendente'">
+      <!-- <ion-item>
       <ion-avatar item-start>
         <img src="http://lorempixel.com/80/80">
       </ion-avatar>
       <h2>Marty McFly</h2>
       <p>November 5, 1955</p>
-    </ion-item>
-    <img src="http://lorempixel.com/500/300">
-    <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?!
-        Whoa. This is heavy.</p>
-    </ion-card-content>
-    <ion-list>
-      <ion-item-sliding>
-        <ion-item>
-          <h3>Aprovar / Reprovar</h3>
-        </ion-item>
-        <ion-item-options side="left">
-          <button ion-button color="danger">
+    </ion-item> -->
+      <img src="{{post.image}}" class="{{post.filter}}">
+      <ion-card-content>
+        <p>{{post.message}}</p>
+      </ion-card-content>
+      <ion-list>
+        <ion-item-sliding>
+          <ion-item>
+            <h3>Reprovar / Aprovar</h3>
+          </ion-item>
+          <ion-item-options side="left">
+            <button ion-button color="danger" (click)="delete()">
             <ion-icon name="thumbs-down"></ion-icon>
           </button>
-        </ion-item-options>
-        <ion-item-options side="right">
-          <button ion-button color="secondary">
+          </ion-item-options>
+          <ion-item-options side="right">
+            <button ion-button color="secondary" (click)="approve()">
             <ion-icon name="thumbs-up"></ion-icon>
           </button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
   </ion-card>
 </ion-content>

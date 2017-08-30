@@ -9,5 +9,10 @@
     "type": "image/png"
   }],
   "background_color": "#4e8ef7",
-  "theme_color": "#4e8ef7"
+  "theme_color": "#4e8ef7",
+  "permissions": {
+    "video-capture": {
+      "description": "Required to capture video using getUserMedia()"
+    }
+  }
 }

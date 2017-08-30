@@ -20,19 +20,27 @@ import { TakePicture } from '../pages/take-picture/take-picture';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Camera } from "@ionic-native/camera";
 import { HttpModule } from '@angular/http';
-// import { AngularFireModule } from 'angularfire2';
-// import { AngularFireDatabaseModule } from 'angularfire2/database';
-// import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 
 import firebase from 'firebase';
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyB2tfUOV6-uGGCgM2WerwMxbCjLS7XY15k",
+//   authDomain: "db-righion.firebaseapp.com",
+//   databaseURL: "https://db-righion.firebaseio.com",
+//   projectId: "db-righion"
+// };
+
 const firebaseConfig = {
-  apiKey: "AIzaSyB2tfUOV6-uGGCgM2WerwMxbCjLS7XY15k",
-  authDomain: "db-righion.firebaseapp.com",
-  databaseURL: "https://db-righion.firebaseio.com",
-  projectId: "db-righion"
+  apiKey: "AIzaSyCfstsRMGc4EdclUKs3iKULrwEvoVn9IFs",
+  authDomain: "rakutenexpo2017.firebaseapp.com",
+  databaseURL: "https://rakutenexpo2017.firebaseio.com",
+  projectId: "rakutenexpo2017"
 };
 
 @NgModule({
@@ -57,9 +65,9 @@ const firebaseConfig = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    // AngularFireDatabaseModule,
-    // AngularFireModule.initializeApp(firebaseConfig),
-    // AngularFireAuthModule
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -82,6 +90,7 @@ const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider
   ]

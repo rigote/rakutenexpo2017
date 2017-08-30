@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, ModalController } from 'ionic-angular';
+import { NavController, ViewController, ModalController, LoadingController } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'page-time-line-approval',
@@ -7,7 +8,16 @@ import { NavController, ViewController, ModalController } from 'ionic-angular';
 })
 export class TimeLineApproval {
 
-  constructor(public viewCtrl: ViewController) {
+  public posts: any[] = [];
+
+  constructor(public viewCtrl: ViewController, public loadingCtrl: LoadingController, db: AngularFireDatabase) {
+    let loader = this.loadingCtrl.create({ content: "Carregando..." });
+    loader.present();
+
+    db.list('/posts').subscribe(posts => {
+      this.posts = posts.reverse();
+      loader.dismiss();
+    });
   }
 
   ionViewDidLoad() {
@@ -16,6 +26,14 @@ export class TimeLineApproval {
 
   dismiss(){
     this.viewCtrl.dismiss();
+  }
+
+  delete(){
+    console.log('Deletando corretamente.');
+  }
+
+  approve(){
+    console.log('Aprovando corretamente.');
   }
 
 }

@@ -1,3 +1,9 @@
 page-take-picture {
-    
+    ion-content{
+        ion-card{
+            display: inline-block !important;
+            width: 500px !important;
+            height: 900px !important;
+        }
+    }
 }

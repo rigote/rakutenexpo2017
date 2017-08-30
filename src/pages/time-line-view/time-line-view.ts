@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, LoadingController } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { TakePicture } from '../take-picture/take-picture';
 import { TimeLineApproval } from '../time-line-approval/time-line-approval';
@@ -10,7 +11,21 @@ import { TimeLineApproval } from '../time-line-approval/time-line-approval';
 })
 export class TimeLineView {
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  public posts: any[] = [];
+
+  constructor(
+    public navCtrl: NavController, 
+    public modalCtrl: ModalController, 
+    public loadingCtrl: LoadingController,
+    db: AngularFireDatabase
+  ) {
+    let loader = this.loadingCtrl.create({ content: "Carregando..." });
+    loader.present();
+
+    db.list('/posts').subscribe(posts => {
+      this.posts = posts.reverse();
+      loader.dismiss();
+    });
   }
 
   ionViewDidLoad() {
