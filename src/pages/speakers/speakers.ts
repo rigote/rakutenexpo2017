@@ -2,6 +2,7 @@ import { Profile } from './../profile/profile';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
+import { Device } from '@ionic-native/device';
 
 @Component({
   selector: 'page-speakers',
@@ -20,13 +21,12 @@ export class Speakers {
   public _palestras: Array<any> = [];
   public _trilhas: Array<any> = [];
   public _agendamentos: Array<any> = [];
-  private _uuID: any;
+  private uuID: any;
   public favoriteFilterSelected: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, private device: Device) {
     var root = this;
-    //this._uuID = typeof Device.device.uuid == 'undefined' ? '123456' : Device.device.uuid;
-    this._uuID = '123';
+    this.uuID = this.device.uuid || '123456';
 
     this.firebaseProvider.getAllPalestrantes().on('value', (data) => {
       root.dataPalestrante = data.val();      
@@ -43,7 +43,7 @@ export class Speakers {
       root.initializeItems(3);
     });
 
-    this.firebaseProvider.getAgendamentoByUUID(root._uuID).on('value', (data) => {
+    this.firebaseProvider.getAgendamentoByUUID(root.uuID).on('value', (data) => {
       root.dataAgendamento = data.val();
       root.initializeItems(4);
     });
@@ -181,7 +181,7 @@ export class Speakers {
   }
 
   public toggleLecture(item: any) {
-
+    debugger;
     let palestraIDs: Array<any> = [];
 
     for (var palestra in this._palestras) {  
@@ -196,7 +196,7 @@ export class Speakers {
     let key: any;
 
     for (var agendamento in this._agendamentos) {
-      if (this._agendamentos[agendamento].deviceID == this._uuID && this._agendamentos[agendamento].palestraID == palestraIDs[0]) {
+      if (this._agendamentos[agendamento].deviceID == this.uuID && this._agendamentos[agendamento].palestraID == palestraIDs[0]) {
         scheduled = true;
         key = this._agendamentos[agendamento].key;
         break;
@@ -208,7 +208,7 @@ export class Speakers {
     }
     else {
       this.firebaseProvider.addAgendamento({
-        deviceID: this._uuID,
+        deviceID: this.uuID,
         palestraID: palestraIDs[0]
       });
     }

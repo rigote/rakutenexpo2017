@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
+import { Device } from '@ionic-native/device';
 
 @Component({
   selector: 'page-schedule',
@@ -8,16 +9,21 @@ import { FirebaseProvider } from './../../providers/firebase/firebase';
 })
 export class Schedule {
 
-  public palestras: any = [];
+  public palestras: Array<any> = [];
   public dataPalestra: any;
-  public trilhas: any = [];
+  public trilhas: Array<any> = [];
   public dataTrilha: any;
-  public palestrantes: any = [];
+  public palestrantes: Array<any> = [];
   public dataPalestrante: any;
+  public agendamentos: Array<any> = [];
+  public dataAgendamento: any;
+  public uuID: any;
 
-  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider) {    
+  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider, private device: Device) {
     var root = this;
-    
+
+    this.uuID = this.device.uuid || '123456';
+
     this.firebaseProvider.getAllPalestras().once('value', (data) => {
       root.dataPalestra = data.val();
       root.initializeItems(1);
@@ -32,56 +38,70 @@ export class Schedule {
       root.dataTrilha = data.val();
       root.initializeItems(3);
     });
+
+    this.firebaseProvider.getAgendamentoByUUID(root.uuID).on('value', (data) => {
+      root.dataAgendamento = data.val();
+      root.initializeItems(4);
+    });
   }
 
   private initializeItems(type: number) {
     var result = [];
-    
+
     switch (type) {
       case 1:
-        for (var item in this.dataPalestra) {        
+        for (var palestra in this.dataPalestra) {
           result.push({
-            key: item,
-            index: this.dataPalestra[item].index,
-            titulo: this.dataPalestra[item].titulo,
-            descricao: this.dataPalestra[item].descricao,
-            horario: this.dataPalestra[item].horario,
-            trilhaID: this.dataPalestra[item].trilhaID,
-            palestranteIDs: this.dataPalestra[item].palestranteIDs
-          });        
+            key: palestra,
+            index: this.dataPalestra[palestra].index,
+            titulo: this.dataPalestra[palestra].titulo,
+            descricao: this.dataPalestra[palestra].descricao,
+            horario: this.dataPalestra[palestra].horario,
+            trilhaID: this.dataPalestra[palestra].trilhaID,
+            palestranteIDs: this.dataPalestra[palestra].palestranteIDs
+          });
         }
 
         this.palestras = result;
-      break;
+        break;
       case 2:
-        for (var item in this.dataPalestrante) {        
+        for (var palestrante in this.dataPalestrante) {
           result.push({
-            key: item,
-            descricao: this.dataPalestrante[item].descricao,
-            foto: this.dataPalestrante[item].foto,
-            nome: this.dataPalestrante[item].nome,
-            ocupacao: this.dataPalestrante[item].ocupacao,
-            index: this.dataPalestrante[item].index
-          });        
+            key: palestrante,
+            descricao: this.dataPalestrante[palestrante].descricao,
+            foto: this.dataPalestrante[palestrante].foto,
+            nome: this.dataPalestrante[palestrante].nome,
+            ocupacao: this.dataPalestrante[palestrante].ocupacao,
+            index: this.dataPalestrante[palestrante].index
+          });
         }
 
         this.palestrantes = result;
-      break;
+        break;
       case 3:
-        for (var item in this.dataTrilha) {        
+        for (var trilha in this.dataTrilha) {
           result.push({
-            key: item,
-            canal: this.dataTrilha[item].canal,
-            nome: this.dataTrilha[item].nome,
-            alias: this.dataTrilha[item].alias
-          });        
+            key: trilha,
+            canal: this.dataTrilha[trilha].canal,
+            nome: this.dataTrilha[trilha].nome,
+            alias: this.dataTrilha[trilha].alias
+          });
         }
 
         this.trilhas = result;
-      break;
-    }    
+        break;
+      case 4:
+        for (var agendamento in this.dataAgendamento) {
+          result.push({
+            key: agendamento,
+            deviceID: this.dataAgendamento[agendamento].deviceID,
+            palestraID: this.dataAgendamento[agendamento].palestraID //palestranteID
+          });
+        }
 
-    
+        this.agendamentos = result;
+        break;
+    }
   }
 
   public getTimeList(): Array<string> {
@@ -111,16 +131,16 @@ export class Schedule {
     let result: any = [];
 
     for (let i: number = 0; i < this.palestras.length; i++) {
-        if (hour == this.palestras[i].horario) {
-          result.push({
-            key: this.palestras[i].key,
-            horario: this.palestras[i].horario,
-            titulo: this.palestras[i].titulo,
-            descricao: this.palestras[i].descricao,
-            palestrantes: this.getPalestrantes(this.palestras[i].palestranteIDs),
-            trilhaID: this.palestras[i].trilhaID
-          });
-        }
+      if (hour == this.palestras[i].horario) {
+        result.push({
+          key: this.palestras[i].key,
+          horario: this.palestras[i].horario,
+          titulo: this.palestras[i].titulo,
+          descricao: this.palestras[i].descricao,
+          palestrantes: this.getPalestrantes(this.palestras[i].palestranteIDs),
+          trilhaID: this.palestras[i].trilhaID
+        });
+      }
     }
 
     return result;
@@ -128,7 +148,7 @@ export class Schedule {
   }
 
   public getPalestrantesLabel(palestrantes: Array<any>): string {
-    
+
     let result: string = '';
 
     for (let i: number = 0; i < palestrantes.length; i++) {
@@ -141,10 +161,46 @@ export class Schedule {
 
   }
 
+  public toggleLecture(item: Array<any>) {
+
+    if (item.length > 0){
+      let palestraIDs: Array<any> = [];
+      
+      for (var palestra in this.palestras) {
+        if (typeof this.palestras[palestra].palestranteIDs != 'undefined' && this.palestras[palestra].palestranteIDs.indexOf(item[0].key) > -1) {
+          for (var palestrante in this.palestras[palestra].palestranteIDs) {
+            palestraIDs.push(this.palestras[palestra].palestranteIDs[palestrante]);
+          }
+        }
+      }
+  
+      let scheduled: boolean = false;
+      let key: any;
+  
+      for (var agendamento in this.agendamentos) {
+        if (this.agendamentos[agendamento].deviceID == this.uuID && this.agendamentos[agendamento].palestraID == palestraIDs[0]) {
+          scheduled = true;
+          key = this.agendamentos[agendamento].key;
+          break;
+        }
+      }
+  
+      if (scheduled) {
+        this.firebaseProvider.removeAgendamento(key);
+      }
+      else {
+        this.firebaseProvider.addAgendamento({
+          deviceID: this.uuID,
+          palestraID: palestraIDs[0]
+        });
+      }
+    }
+  }
+
   private getPalestrantes(palestranteIDs: Array<string>): Array<any> {
-    
+
     let result: Array<any> = [];
-    
+
     if (typeof palestranteIDs != 'undefined') {
       for (let i: number = 0; i < palestranteIDs.length; i++) {
         for (let j: number = 0; j < this.palestrantes.length; j++) {
@@ -180,9 +236,9 @@ export class Schedule {
           case 3: //nome
             return this.trilhas[index].nome;
         }
-      }        
+      }
     }
-    
+
     return '';
   }
 
