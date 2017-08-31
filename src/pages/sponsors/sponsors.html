@@ -8,31 +8,41 @@
 </ion-header>
 
 
-<ion-content padding>
-  <div class="patrocinadores">
-    <div class="row box" *ngIf="_diamond.length > 0">
-      <h3>Diamond</h3>
-      <img *ngFor="let item of _diamond" src="{{item.logo}}" alt="{{item.nome}}" />
+<ion-content>
+  <ion-list no-lines>
+    <ion-item-divider color="light">
+      Diamond
+    </ion-item-divider>
+    <div *ngIf="_diamond.length > 0">
+      <img *ngFor="let item of _diamond" src="{{item.logo}}" alt="{{item.nome}}" (click)="openProfile()"/>
     </div>
 
-    <div class="row box" *ngIf="_gold.length > 0">
-      <h3>Gold</h3>
-      <img *ngFor="let item of _gold" src="{{item.logo}}" alt="{{item.nome}}" />
+    <ion-item-divider color="light">
+      Gold
+    </ion-item-divider>
+    <div *ngIf="_gold.length > 0">
+      <img *ngFor="let item of _gold" src="{{item.logo}}" alt="{{item.nome}}" (click)="openProfile()"/>
     </div>
 
-    <div class="row box" *ngIf="_silver.length > 0">
-      <h3>Silver</h3>
-      <img *ngFor="let item of _silver" src="{{item.logo}}" alt="{{item.nome}}" />
+    <ion-item-divider color="light">
+      Silver
+    </ion-item-divider>
+    <div *ngIf="_silver.length > 0">
+      <img *ngFor="let item of _silver" src="{{item.logo}}" alt="{{item.nome}}" (click)="openProfile()"/>
     </div>
 
-    <div class="row box" *ngIf="_bronze.length > 0">
-      <h3>Bronze</h3>
-      <img *ngFor="let item of _bronze" src="{{item.logo}}" alt="{{item.nome}}" />
+    <ion-item-divider color="light">
+      Bronze
+    </ion-item-divider>
+    <div *ngIf="_bronze.length > 0">
+      <img *ngFor="let item of _bronze" src="{{item.logo}}" alt="{{item.nome}}" (click)="openProfile()"/>
     </div>
 
-    <div class="row box" *ngIf="_apoio.length > 0">
-      <h3>Apoio</h3>
-      <img *ngFor="let item of _apoio" src="{{item.logo}}" alt="{{item.nome}}" />
+    <ion-item-divider color="light">
+      Apoio
+    </ion-item-divider>
+    <div *ngIf="_apoio.length > 0">
+      <img *ngFor="let item of _apoio" src="{{item.logo}}" alt="{{item.nome}}" (click)="openProfile()"/>
     </div>
-  </div>
+  </ion-list>
 </ion-content>

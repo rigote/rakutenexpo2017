@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
 
+import { Profile } from './../profile/profile';
 
 @Component({
   selector: 'page-sponsors',
@@ -18,7 +19,7 @@ export class Sponsors {
   public _diamond: Array<any> = [];
   public _apoio: Array<any> = [];
 
-  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider) {
+  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider, public navParams: NavParams) {
     var root = this;
     this.firebaseProvider.getAllPatrocinadores().once('value', (data) => {
       root.dataSponsor = data.val();
@@ -70,6 +71,10 @@ export class Sponsors {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Sponsors');
+  }
+
+  openProfile(){
+    this.navCtrl.push(Profile);
   }
 
 }
