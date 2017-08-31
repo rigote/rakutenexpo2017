@@ -31,6 +31,7 @@ export class TakePicture {
       quality: 100,
       targetWidth: 500,
       targetHeight: 300,
+      allowEdit: true,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,

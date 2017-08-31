@@ -111,7 +111,7 @@ export class TimeLineCreate {
         setTimeout(() => {
           this.viewCtrl.dismiss();
           alert.present();
-        }, 1500);
+        }, 800);
       })
       .catch(() => {
         loader.dismiss();
