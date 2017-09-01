@@ -15,9 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-ion-header{
-    
-}
+$background: url('/assets/images/bg-login.jpg') no-repeat center;
 
 ion-menu{
     .header-ios{
@@ -43,4 +41,17 @@ span{
 
 .auto-scroll .scroll-content {
     overflow: auto;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #FFF !important;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #FFF !important;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #FFF !important;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #FFF !important;
   }
