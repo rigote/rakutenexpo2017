@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { LoadingController, NavController, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Facebook,FacebookLoginResponse  } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 import * as firebase from 'firebase';
 
 import { Signup } from '../signup/signup';
@@ -29,6 +31,8 @@ export class Login{
     private afAuth: AngularFireAuth,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
+    public gPlus: GooglePlus,
+    public fbLogin: Facebook,
     private alertCtrl: AlertController) {
     this.form = this.fb.group({
       email: ['', Validators.compose([
@@ -72,26 +76,35 @@ export class Login{
   }
 
   loginWithFacebook(){
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-    .then(res=> {
-      let loader = this.loadingCtrl.create({ content: "Autenticando..." });
-      loader.present();
-      console.log(res);
-      this.facebook.loggedIn = true;
-      this.facebook.email = res.user.email;
-      loader.dismiss();
-    })
+    this.fbLogin.login(['public_profile', 'user_friends', 'email'])
+    .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
+    .catch(e => console.log('Error logging into Facebook', e));
+  
+  
+    //this.fbLogin.logEvent(this.fbLogin.EVENTS.EVENT_NAME_ADDED_TO_CART);
+    // this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    // .then(res=> {
+    //   let loader = this.loadingCtrl.create({ content: "Autenticando..." });
+    //   loader.present();
+    //   console.log(res);
+    //   this.facebook.loggedIn = true;
+    //   this.facebook.email = res.user.email;
+    //   loader.dismiss();
+    // })
   }
 
   loginWithGoogle(){
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then(res=> {
-      let loader = this.loadingCtrl.create({ content: "Autenticando..." });
-      loader.present();
-      this.google.loggedIn = true;
-      this.google.email = res.user.email;
-      loader.dismiss();
-    })
+    this.gPlus.login({})
+    .then(res => console.log(res))
+    .catch(err => console.error(err));
+    // this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    // .then(res=> {
+    //   let loader = this.loadingCtrl.create({ content: "Autenticando..." });
+    //   loader.present();
+    //   this.google.loggedIn = true;
+    //   this.google.email = res.user.email;
+    //   loader.dismiss();
+    // })
   }
   
   logOut(){
