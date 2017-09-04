@@ -28,8 +28,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { Device } from '@ionic-native/device';
-import { Facebook } from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
 
 import firebase from 'firebase';
 
@@ -97,8 +95,6 @@ const firebaseConfig = {
     Camera,
     Device,
     Crop,
-    Facebook,
-    GooglePlus,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider
   ]
