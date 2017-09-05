@@ -98,7 +98,7 @@ export class Schedule {
             palestraID: this.dataAgendamento[agendamento].palestraID //palestranteID
           });
         }
-
+        
         this.agendamentos = result;
         break;
     }
@@ -162,7 +162,6 @@ export class Schedule {
   }
 
   public toggleLecture(item: Array<any>) {
-
     if (item.length > 0){
       let palestraIDs: Array<any> = [];
       

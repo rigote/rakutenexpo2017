@@ -10,7 +10,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-card *ngFor="let palestrante of _palestrantes">
+    <ion-card *ngFor="let palestrante of getPalestrantes()">
       <ion-item>
         <img src="{{palestrante.foto}}" (click)="openProfile(palestrante)">
         <div class="dataSpeaker" (click)="openProfile(palestrante)">
@@ -27,6 +27,9 @@
           </div>
         </div>
       </ion-item>
-    </ion-card>
+    </ion-card>    
   </ion-list>
+  <div *ngIf="getPalestrantes().length == 0">
+      Não há palestrantes marcados como favoritos.
+  </div>
 </ion-content>

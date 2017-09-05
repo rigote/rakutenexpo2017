@@ -46,7 +46,6 @@ export class Favorite {
 
   public getPalestrantes(): Array<any> {
     let palestrantes: Array<any> = [];
-    let result: Array<any> = [];
 
     for (var agendamento in this._agendamentos) {
       for (var palestrante in this._palestrantes) {
@@ -55,16 +54,8 @@ export class Favorite {
         }
       }
     }
-    
-    for(let i: number = 0; i < this._palestrantes.length; i++) {
-      for (let j: number = 0; j < palestrantes.length; j++) {
-        if (this._palestrantes[i].key == palestrantes[j]) {
-          result.push(this._palestrantes[i]);
-          break;
-        }
-      }      
-    }
-    return result;    
+
+    return palestrantes;    
   }
 
   public getLectureTime(key): any {
@@ -166,7 +157,7 @@ export class Favorite {
             palestraID: this.dataAgendamento[agendamento].palestraID //palestranteID
           });        
         }
-
+        console.log(result);
         this._agendamentos = result;
         break;
     }

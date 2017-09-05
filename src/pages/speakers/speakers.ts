@@ -184,7 +184,6 @@ export class Speakers {
   }
 
   public toggleLecture(item: any) {
-    debugger;
     let palestraIDs: Array<any> = [];
 
     for (var palestra in this._palestras) {  
