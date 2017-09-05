@@ -1,9 +1,5 @@
-@import "../../theme/variables";
-
 page-login {
     ion-content{
-        background: $background;
-        background-repeat: no-repeat;
         z-index: 2;
         ion-col{
             z-index: 9999;
