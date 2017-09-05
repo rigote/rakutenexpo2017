@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoadingController, NavController, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
 
 import { Signup } from '../signup/signup';
 import { HomePage } from '../home/home';
@@ -12,6 +13,16 @@ import { HomePage } from '../home/home';
 })
 export class Login{
   public form: FormGroup;
+
+  facebook = {
+    loggedIn: false,
+    email: ''
+  }
+
+  google = {
+    loggedIn: false,
+    email: ''
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +69,39 @@ export class Login{
         });
         alert.present();
       });
+  }
+
+  loginWithFacebook(){
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    .then(res=> {
+      let loader = this.loadingCtrl.create({ content: "Autenticando..." });
+      loader.present();
+      console.log(res);
+      this.facebook.loggedIn = true;
+      this.facebook.email = res.user.email;
+      loader.dismiss();
+    })
+  }
+
+  loginWithGoogle(){
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then(res=> {
+      let loader = this.loadingCtrl.create({ content: "Autenticando..." });
+      loader.present();
+      this.google.loggedIn = true;
+      this.google.email = res.user.email;
+      loader.dismiss();
+    })
+  }
+  
+  logOut(){
+    this.facebook.loggedIn = false;
+    this.google.loggedIn = false;
+    this.afAuth.auth.signOut();
+  }
+
+  forgotPassword(){
+    this.afAuth.auth.sendPasswordResetEmail(this.form.controls['email'].value);
   }
 
   goToSignup() {

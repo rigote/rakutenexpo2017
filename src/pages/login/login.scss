@@ -1,1 +1,39 @@
-page-login {}
+@import "../../theme/variables";
+
+page-login {
+    ion-content{
+        background: $background;
+        background-repeat: no-repeat;
+        z-index: 2;
+        ion-col{
+            z-index: 9999;
+            h1{
+                img{
+                    width: 35%;
+                }
+            }
+            ion-list{
+                ion-item{
+                    background: none !important;
+                    color: #FFF !important;
+                    border: 1px solid #FFF !important;
+                    margin-bottom: 5px !important;
+                    text-shadow: $text-shadow !important;
+                }
+            }
+            small{
+                width: 100%;
+                color: #FFF;
+                display: inline-block;
+                margin: 2px 0;
+                text-shadow: $text-shadow;
+            }
+            .socialLogin{
+                img{
+                    width: 50px;;
+                    margin: 0 10px;
+                }
+            }            
+        }
+    }
+}

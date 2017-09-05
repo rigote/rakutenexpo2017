@@ -3,18 +3,28 @@
     <ion-row align-items-center justify-content-center>
       <ion-col col-12 col-sm-12 col-md-6>
         <form [formGroup]="form">
-          <br><br><br>
-          <h1 text-center class="oleo-script logo-title">Rakuten Expo 2017</h1>
+          <br>
+          <h1 text-center class="logo-title">
+            <img src="assets/images/logo-expo.png" alt="Rakuten Expo 2017">
+          </h1>
           <br><br>
           <ion-list no-lines>
             <ion-item>
+              <ion-icon name="mail" item-left light small></ion-icon>
               <ion-input type="email" placeholder="E-mail" maxlength="140" formControlName="email"></ion-input>
             </ion-item>
             <ion-item>
+              <ion-icon name="lock" item-left light small></ion-icon>
               <ion-input type="password" placeholder="Senha" maxlength="20" formControlName="password"></ion-input>
             </ion-item>
+            <small text-right>Esqueceu sua senha?</small>
           </ion-list>
           <button ion-button block color="barcelona" (click)="submit()" [disabled]="!form.valid">Entrar</button>
+          <small text-center>ou se logue com:</small>
+          <div class="socialLogin" text-center>
+            <span (click)="loginWithFacebook()"><img src="assets/images/facebook-icon.png" alt=""></span>
+            <span (click)="loginWithGoogle()"><img src="assets/images/google-icon.png" alt=""></span>
+          </div>
         </form>
       </ion-col>
     </ion-row>
@@ -22,7 +32,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar text-center>
+  <ion-toolbar text-center barcelona>
     <ion-buttons>
       <button small ion-button block (click)="goToSignup()">
           <small>Ainda não tem conta?&nbsp;<strong>Cadastre-se</strong></small>
