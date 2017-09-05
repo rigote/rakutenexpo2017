@@ -15,13 +15,12 @@
     <ion-slides (ionSlideDidChange)="changeFilter()">
       <ion-slide *ngFor="let filter of filters" text-center>
         <img src="{{photo}}" class="{{filter}}">
-        <small>{{filter}}</small>
       </ion-slide>
     </ion-slides>
     <ion-card-content>
       <form [formGroup]="form">
         <ion-list no-lines>
-          <ion-textarea placeholder="Mensagem" row="3" formControlName="message"></ion-textarea>
+          <ion-textarea row="3" formControlName="message" placeholder="Digite aqui sua mensagem..."></ion-textarea>
         </ion-list>
       </form>
     </ion-card-content>

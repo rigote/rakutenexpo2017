@@ -3,5 +3,10 @@ page-time-line-create {
     div {
         text-align: justify;
     }
+    ion-textarea{
+      ::placeholder {
+        color: #666666 !important;
+      }
+    }
   }
 }

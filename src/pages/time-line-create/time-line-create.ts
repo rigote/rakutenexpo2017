@@ -96,7 +96,7 @@ export class TimeLineCreate {
       .push({
         user: this.user,
         status: "pendente",
-        image: this.photo,
+        image: this.photo ? this.photo : "",
         filter: this.filter,
         message: this.form.controls['message'].value,
         date: firebase.database.ServerValue.TIMESTAMP
