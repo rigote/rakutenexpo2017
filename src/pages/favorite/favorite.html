@@ -9,5 +9,24 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-card *ngFor="let palestrante of _palestrantes">
+      <ion-item>
+        <img src="{{palestrante.foto}}" (click)="openProfile(palestrante)">
+        <div class="dataSpeaker" (click)="openProfile(palestrante)">
+          <h2>{{palestrante.nome}}</h2>
+          <p>{{palestrante.ocupacao}}</p>
+        </div>
+        <div class="infoSpeaker">
+          <div class="dataInfo">
+            <span><ion-icon name="time"></ion-icon> {{getLectureTime(palestrante.key)}}</span>
+            <span class="separator"></span>
+            <span><ion-icon name="headset"></ion-icon> {{getChannel(palestrante.key)}}</span>
+            <span class="separator"></span>
+            <span><ion-icon name="star" (click)="toggleLecture(item)"></ion-icon></span>
+          </div>
+        </div>
+      </ion-item>
+    </ion-card>
+  </ion-list>
 </ion-content>

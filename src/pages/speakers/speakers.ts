@@ -28,24 +28,27 @@ export class Speakers {
     var root = this;
     this.uuID = this.device.uuid || '123456';
 
-    this.firebaseProvider.getAllPalestrantes().on('value', (data) => {
-      root.dataPalestrante = data.val();      
-      root.initializeItems(1);
-    });
-
-    this.firebaseProvider.getAllPalestras().on('value', (data) => {
-      root.dataPalestra = data.val();
-      root.initializeItems(2);
-    });
-
     this.firebaseProvider.getAllTrilhas().on('value', (data) => {
       root.dataTrilha = data.val();
       root.initializeItems(3);
-    });
 
-    this.firebaseProvider.getAgendamentoByUUID(root.uuID).on('value', (data) => {
-      root.dataAgendamento = data.val();
-      root.initializeItems(4);
+      setTimeout(function(){
+        root.firebaseProvider.getAllPalestrantes().on('value', (data) => {
+          root.dataPalestrante = data.val();      
+          root.initializeItems(1);
+        });
+    
+        root.firebaseProvider.getAllPalestras().on('value', (data) => {
+          root.dataPalestra = data.val();
+          root.initializeItems(2);
+        });
+    
+        root.firebaseProvider.getAgendamentoByUUID(root.uuID).on('value', (data) => {
+          root.dataAgendamento = data.val();
+          root.initializeItems(4);
+        });
+      }, 1000);
+      
     });
   }
 
