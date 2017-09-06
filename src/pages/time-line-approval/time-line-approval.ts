@@ -43,7 +43,7 @@ export class TimeLineApproval {
       loader.dismiss();
       let alert = this.alertCtrl.create({
         title: 'Sucesso',
-        subTitle: 'Postagem aprovada com sucesso.',
+        subTitle: 'Postagem alterada com sucesso.',
         buttons: ['OK']
       });
       setTimeout(() => {

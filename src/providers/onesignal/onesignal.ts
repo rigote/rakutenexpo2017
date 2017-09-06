@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class OnesignalProvider {
@@ -11,20 +13,23 @@ export class OnesignalProvider {
     console.log('Hello OnesignalProvider Provider');
   }
 
-  getall(){
-    return new Promise((resolve,reject) =>{
-      this.http.head('Authorization: Basic N2QwYTA0ZGQtYzk1NC00MmMyLWJmYzMtMDdjYWQ0Y2IzNjhj');
-      this.http.get(this.API_URL)
-        .subscribe((result:any)=>{
-          resolve(result.json());
-          console.log(result.json());
-        },
-        (error) => {
-          reject(error.json());
-          console.log(error.json());
-        }
-      )
-    }
-  );
+  createAuthorizationHeader(headers: Headers) {
+    headers.append('Authorization', 'Basic N2QwYTA0ZGQtYzk1NC00MmMyLWJmYzMtMDdjYWQ0Y2IzNjhj'); 
+  }
+
+  getNotifications(){
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.get(this.API_URL, {headers: headers})
+    .map(this.extractData)
+    .do(this.logResponse)
+  }
+
+  private logResponse(res: Response){
+    console.log(res);
+  }
+
+  private extractData(res: Response){
+    return res.json();
   }
 }
