@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
 import { Device } from '@ionic-native/device';
 
+import { Profile } from './../profile/profile';
+
 @Component({
   selector: 'page-favorite',
   templateUrl: 'favorite.html',
@@ -166,6 +168,10 @@ export class Favorite {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Favorite');
+  }
+
+  openProfile(profile: any){
+    this.navCtrl.push(Profile, { profile: profile, lecture: this.getLecture(profile.key) });
   }
 
 }

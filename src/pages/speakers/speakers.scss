@@ -101,7 +101,9 @@ page-speakers {
                         width: 100%;
                         text-align: right;
                         line-height: 40px;
+                        z-index: 9999;
                         span{
+                            z-index: 9999;
                             padding: 0 5px;
                             &.separator{
                                 padding: 2px;
