@@ -31,6 +31,7 @@ import { Device } from '@ionic-native/device';
 
 import firebase from 'firebase';
 import { OnesignalProvider } from '../providers/onesignal/onesignal';
+import { BannerProvider } from '../providers/banner/banner';
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyB2tfUOV6-uGGCgM2WerwMxbCjLS7XY15k",
@@ -98,7 +99,8 @@ const firebaseConfig = {
     Crop,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider,
-    OnesignalProvider
+    OnesignalProvider,
+    BannerProvider
   ]
 })
 export class AppModule {
