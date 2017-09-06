@@ -11,6 +11,7 @@ export class FirebaseProvider {
     private _agendamentos: any;
     private _patrocinadores: any;
     private _informacoes: any;
+    private _banners: any;
     public connection: any;
 
     constructor() {
@@ -20,6 +21,7 @@ export class FirebaseProvider {
         this._agendamentos = firebase.database().ref('/data/agendamentos');
         this._patrocinadores = firebase.database().ref('/data/patrocinadores');
         this._informacoes = firebase.database().ref('/data/informacoes');
+        this._banners = firebase.database().ref('/data/banners');
         this.connection = firebase.database().ref('/.info/connected');
     }
 
@@ -91,6 +93,14 @@ export class FirebaseProvider {
 
     public getAllInformacoes(): any {
         return this._informacoes;
+    }
+
+    public getBanner(id: any): any {
+        return this._banners.child(id);
+    }
+
+    public getAllBanners(): any {
+        return this._banners;
     }
 
 }
