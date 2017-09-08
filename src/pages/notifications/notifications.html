@@ -10,8 +10,8 @@
 
 <ion-content>
   <ion-list *ngFor="let notification of listNotifications.notifications">
-    <ion-item>
-      <ion-avatar item-start><img src="{{notification.adm_large_icon}}" alt=""></ion-avatar>
+    <ion-item *ngIf="notification.canceled == false">
+      <ion-avatar item-start><img src="{{notification.large_icon}}" alt=""></ion-avatar>
       <ion-note item-end>{{notification.delivery_time_of_day}}</ion-note>
       <p>{{notification.contents.en}}</p>
     </ion-item>
