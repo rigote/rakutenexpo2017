@@ -12,6 +12,7 @@ export class FirebaseProvider {
     private _patrocinadores: any;
     private _informacoes: any;
     private _banners: any;
+    private _posts: any;
     public connection: any;
 
     constructor() {

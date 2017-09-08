@@ -17,12 +17,18 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let post of posts">
-    <div *ngIf="post.status == 'aprovado'">
-      <img src="{{post.image}}">
-      <ion-card-content>
-        <p>{{post.message}}</p>
-      </ion-card-content>
-    </div>
-  </ion-card>
+  <div *ngFor="let post of posts; let idx = index">
+    <ion-card>
+      <div *ngIf="post.status == 'aprovado'">
+        <img src="{{post.image}}">
+        <ion-card-content>
+          <p>{{post.message}}</p>
+        </ion-card-content>      
+      </div>
+    </ion-card>
+    <ion-card *ngIf="idx > 0 && idx % 2 == 0">
+      {{'teste'}}
+      {{post.banner != null ? post.banner.nome : ''}}
+    </ion-card>
+  </div>
 </ion-content>

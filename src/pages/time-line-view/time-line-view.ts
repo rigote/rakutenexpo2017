@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { TakePicture } from '../take-picture/take-picture';
 import { TimeLineApproval } from '../time-line-approval/time-line-approval';
+import { BannerProvider } from '../../providers/banner/banner';
 
 @Component({
   selector: 'page-time-line-view',
@@ -19,26 +20,42 @@ export class TimeLineView {
     public navCtrl: NavController, 
     public modalCtrl: ModalController, 
     public loadingCtrl: LoadingController,
-    private afAuth: AngularFireAuth,
-    db: AngularFireDatabase
+    public afAuth: AngularFireAuth,
+    public db: AngularFireDatabase,
+    public bannerProvider: BannerProvider
   ) {
-    let loader = this.loadingCtrl.create({ content: "Carregando..." });
-    loader.present();
+  }
 
-    db.list('/posts').subscribe(posts => {
-      this.posts = posts.reverse();
-      loader.dismiss();
-    });
-
-    afAuth.authState.subscribe(user => {
-      if (user) {
-        this.user = user.email
-      }
+  getRandomBanner(index): any{
+    this.bannerProvider.getRandomBanner().then(banner => {
+      this.posts[index].banner = banner;
     });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TimeLineView');
+    let loader = this.loadingCtrl.create({ content: "Carregando..." });
+    loader.present();
+
+    this.db.list('/posts', {
+      query: {
+        orderByChild: 'status',
+        equalTo: 'aprovado' 
+      }
+    }).subscribe(posts => {
+      this.posts = posts.reverse();
+      
+      for(let i = 0; i < this.posts.length; i++) {
+        this.posts[i].banner = null;
+      }
+
+      loader.dismiss();
+    });
+
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.user = user.email
+      }
+    });
   }
 
   modalSendPhoto(){
