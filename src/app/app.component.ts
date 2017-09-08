@@ -13,6 +13,7 @@ import { Sponsors } from '../pages/sponsors/sponsors';
 import { Favorite } from '../pages/favorite/favorite';
 import { HowToGet } from '../pages/how-to-get/how-to-get';
 import { TimeLineView } from '../pages/time-line-view/time-line-view';
+import { BannerProvider } from '../providers/banner/banner';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,11 +21,13 @@ import { TimeLineView } from '../pages/time-line-view/time-line-view';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
+  banner: any;
+
   rootPage: any = Login;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public bannerProvider: BannerProvider) {
     this.initializeApp();
 
     this.pages = [
@@ -36,16 +39,22 @@ export class MyApp {
       { title: 'Patrocinadores', component: Sponsors, icon: 'people' },
       { title: 'Time Line', component: TimeLineView, icon: 'git-merge' },
       { title: 'Notificações', component: Notifications, icon: 'notifications' }      
-    ];
+    ];    
+  }
 
+  getBanner(): any{    
+    this.bannerProvider.getRandomBanner().then(banner => {
+      this.banner = banner
+    });
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.splashScreen.hide(); 
       this.statusBar.overlaysWebView(true);
-      this.statusBar.backgroundColorByHexString('#C00303');   
-    });
+      this.statusBar.backgroundColorByHexString('#C00303');
+      this.getBanner();
+    });    
   }
 
   openPage(page) {

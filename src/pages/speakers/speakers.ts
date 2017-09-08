@@ -10,7 +10,7 @@ import { Device } from '@ionic-native/device';
 })
 export class Speakers {
   
-  trilhas: string = "marketing";
+  trilhas: string;
   pages: Array<{ title: string, component: any }>;
 
   public dataPalestrante: Array<any>;
@@ -24,32 +24,8 @@ export class Speakers {
   private uuID: any;
   public favoriteFilterSelected: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, private device: Device) {
-    var root = this;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, private device: Device) {    
     this.uuID = this.device.uuid || '123456';
-
-    this.firebaseProvider.getAllTrilhas().on('value', (data) => {
-      root.dataTrilha = data.val();
-      root.initializeItems(3);
-
-      setTimeout(function(){
-        root.firebaseProvider.getAllPalestrantes().on('value', (data) => {
-          root.dataPalestrante = data.val();      
-          root.initializeItems(1);
-        });
-    
-        root.firebaseProvider.getAllPalestras().on('value', (data) => {
-          root.dataPalestra = data.val();
-          root.initializeItems(2);
-        });
-    
-        root.firebaseProvider.getAgendamentoByUUID(root.uuID).on('value', (data) => {
-          root.dataAgendamento = data.val();
-          root.initializeItems(4);
-        });
-      }, 1000);
-      
-    });
   }
 
   private initializeItems(type: number) {
@@ -98,6 +74,8 @@ export class Speakers {
         }
 
         this._trilhas = result;
+        this.trilhas = this._trilhas[0].alias;
+
         break;
       case 4:
         for (var agendamento in this.dataAgendamento) {        
@@ -261,7 +239,42 @@ export class Speakers {
   }
 
   ionViewDidLoad() {
+    var root = this;
     
+    let trilhaPromise = new Promise((resolve, reject) => { 
+      this.firebaseProvider.getAllTrilhas().on('value', (data) => {
+        root.dataTrilha = data.val();
+        resolve(root.dataTrilha);
+      })
+    });
+
+    let palestrantePromise = new Promise((resolve, reject) => { 
+      this.firebaseProvider.getAllPalestrantes().on('value', (data) => {
+        root.dataPalestrante = data.val(); 
+        resolve(root.dataPalestrante);
+      });
+    });
+
+    let palestraPromise = new Promise((resolve, reject) => { 
+      this.firebaseProvider.getAllPalestras().on('value', (data) => {
+        root.dataPalestra = data.val();
+        resolve(root.dataPalestra);
+      });
+    });
+
+    let agendamentoPromise = new Promise((resolve, reject) => { 
+      this.firebaseProvider.getAgendamentoByUUID(root.uuID).on('value', (data) => {
+        root.dataAgendamento = data.val();
+        resolve(root.dataAgendamento);
+      });
+    });
+
+    Promise.all([trilhaPromise, palestrantePromise, palestraPromise, agendamentoPromise]).then(values => { 
+      root.initializeItems(3);
+      root.initializeItems(1);
+      root.initializeItems(2);
+      root.initializeItems(4);
+    });
   }
 
   openProfile(profile: any){

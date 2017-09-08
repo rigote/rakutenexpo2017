@@ -5,8 +5,8 @@
     </button>
     <ion-title>Palestrantes</ion-title>
   </ion-navbar>
-  <ion-segment [(ngModel)]="trilhas">
-    <ion-segment-button *ngFor="let trilha of _trilhas" class="{{trilha.alias}} segment-button" (click)="ChangeTab(trilha.alias)">
+  <ion-segment *ngIf="_trilhas" [(ngModel)]="trilhas">
+    <ion-segment-button *ngFor="let trilha of _trilhas" class="{{trilha.alias}} segment-button" value="{{trilha.alias}}" (click)="ChangeTab(trilha.alias)">
       {{trilha.nome}}
     </ion-segment-button>
   </ion-segment>
@@ -29,7 +29,7 @@
                 <span class="separator"></span>
                 <span><ion-icon name="headset"></ion-icon> {{getChannel(palestrante.key)}}</span>
                 <span class="separator"></span>
-                <span><ion-icon name="star" color="disabled" (click)="toggleLecture(item)"></ion-icon></span>
+                <span><ion-icon name="star" color="disabled" (click)="toggleLecture(palestrante)"></ion-icon></span>
               </div>
             </div>
           </ion-item>

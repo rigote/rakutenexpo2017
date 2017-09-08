@@ -15,10 +15,10 @@
   </ion-content>
 
   <ion-footer>
-    <span class="sideSponsor">Banner patrocinador</span>
+    <span class="sideSponsor">Banner patrocinador {{banner ? banner.nome : '-'}}</span>
   </ion-footer>
 
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false" (click)="getBanner()"></ion-nav>
