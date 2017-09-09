@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoadingController, NavController, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Facebook } from '@ionic-native/facebook';
 import * as firebase from 'firebase';
 
 import { Signup } from '../signup/signup';
@@ -29,6 +30,7 @@ export class Login{
     private afAuth: AngularFireAuth,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
+    public facebookAuth: Facebook,
     private alertCtrl: AlertController) {
     this.form = this.fb.group({
       email: ['', Validators.compose([
@@ -72,14 +74,23 @@ export class Login{
   }
 
   loginWithFacebook(){
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-    .then(res=> {
-      let loader = this.loadingCtrl.create({ content: "Autenticando..." });
-      loader.present();
-      console.log(res);
-      this.facebook.loggedIn = true;
-      this.facebook.email = res.user.email;
-      loader.dismiss();
+    this.facebookAuth.login(['email']).then(res=>{
+      const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
+      firebase.auth().signInWithCredential(fc).then(fs=>{
+        let loader = this.loadingCtrl.create({ content: "Autenticando..." });
+        loader.present();
+        console.log(res);
+        loader.dismiss();
+      }).catch(ferror=>{
+        let alert = this.alertCtrl.create({
+          title: 'Autenticação Inválida',
+          subTitle: 'Não foi possível logar com sua conta Facebook.',
+          buttons: ['OK']
+        });
+        alert.present();
+      })
+    }).catch(error=>{
+        console.log(error);
     })
   }
 

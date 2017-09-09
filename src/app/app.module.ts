@@ -28,6 +28,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { Device } from '@ionic-native/device';
+import { Facebook } from '@ionic-native/facebook';
 
 import firebase from 'firebase';
 import { OnesignalProvider } from '../providers/onesignal/onesignal';
@@ -97,6 +98,7 @@ const firebaseConfig = {
     Camera,
     Device,
     Crop,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider,
     OnesignalProvider,

@@ -1,6 +1,9 @@
 page-login {
     ion-content{
         z-index: 2;
+        button{
+            text-transform: uppercase !important;
+        }
         ion-col{
             z-index: 9999;
             h1{

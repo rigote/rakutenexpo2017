@@ -20,10 +20,9 @@
           </ion-list>
           <button ion-button block color="barcelona" (click)="submit()" [disabled]="!form.valid">Entrar</button>
           <small text-center>ou se logue com:</small>
-          <div class="socialLogin" text-center>
-            <span (click)="loginWithFacebook()"><img src="assets/images/facebook-icon.png" alt=""></span>
-            <span (click)="loginWithGoogle()"><img src="assets/images/google-icon.png" alt=""></span>
-          </div>
+          <button ion-button block color="barcelona" icon-left (click)="loginWithFacebook()">
+            <ion-icon name="logo-facebook"></ion-icon> Logar com Facebook
+          </button>
         </form>
       </ion-col>
     </ion-row>
