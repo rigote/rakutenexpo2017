@@ -1,8 +1,15 @@
+@import "../../theme/variables";
+
 page-notifications {
     ion-content{
         ion-item{
             h2,p{
                 white-space: normal;
+                color: color($colors, dark) !important;
+            }
+            ion-note{
+                font-size: 11px;
+                color: color($colors, viber) !important;
             }
         }
     }
