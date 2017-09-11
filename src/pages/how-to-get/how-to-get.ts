@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 @Component({
   selector: 'page-how-to-get',
@@ -7,11 +8,20 @@ import { NavController } from 'ionic-angular';
 })
 export class HowToGet {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private launchNavigator: LaunchNavigator) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HowToGet');
+  }
+
+  openMap(){
+    this.launchNavigator.navigate([-23.6089975, -46.6991569],{
+      app: this.launchNavigator.APP.USER_SELECT
+    }).then(
+      success => console.log('Launched navigator'),
+      error => console.log('Error launching navigator', error)
+    )
   }
 
 }

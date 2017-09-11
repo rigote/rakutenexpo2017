@@ -30,6 +30,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { Device } from '@ionic-native/device';
 import { Facebook } from '@ionic-native/facebook';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 import firebase from 'firebase';
 import { OnesignalProvider } from '../providers/onesignal/onesignal';
@@ -102,6 +103,7 @@ const firebaseConfig = {
     Device,
     Crop,
     Facebook,
+    LaunchNavigator,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider,
     OnesignalProvider,
