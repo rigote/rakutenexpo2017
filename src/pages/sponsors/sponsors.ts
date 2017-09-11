@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
 
-import { Profile } from './../profile/profile';
+import { ProfileSponsor } from './../profile-sponsor/profile-sponsor';
 
 @Component({
   selector: 'page-sponsors',
@@ -18,6 +18,7 @@ export class Sponsors {
   public _bronze: Array<any> = [];
   public _diamond: Array<any> = [];
   public _apoio: Array<any> = [];
+  public _ruby: Array<any> = [];
 
   constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider, public navParams: NavParams) {
     var root = this;
@@ -33,6 +34,7 @@ export class Sponsors {
     for (var item in this.dataSponsor) {        
       result.push({
         key: item,
+        descricao: this.dataSponsor[item].descricao,
         nome: this.dataSponsor[item].nome,
         tipo: this.dataSponsor[item].tipo,
         logo: this.dataSponsor[item].logo
@@ -48,6 +50,7 @@ export class Sponsors {
     this. _bronze = this.getSponsorsByType('Bronze');
     this._diamond = this.getSponsorsByType('Diamond');
     this._apoio = this.getSponsorsByType('Apoio');
+    this._ruby = this.getSponsorsByType('Ruby');
   }
 
   public getSponsorsByType(type: string): Array<any> {
@@ -58,9 +61,10 @@ export class Sponsors {
         if (type == this.sponsors[i].tipo) {
           result.push({
             key: this.sponsors[i].key,
+            descricao: this.sponsors[i].descricao,
             nome: this.sponsors[i].nome,
             tipo: this.sponsors[i].tipo,
-            logo: this.sponsors[i].logo            
+            logo: this.sponsors[i].logo           
           });
         }
     }
@@ -73,8 +77,8 @@ export class Sponsors {
     console.log('ionViewDidLoad Sponsors');
   }
 
-  openProfile(){
-    this.navCtrl.push(Profile);
+  openProfile(profile: any){
+    this.navCtrl.push(ProfileSponsor, { profile: profile });
   }
 
 }

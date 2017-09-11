@@ -17,6 +17,7 @@ import { TimeLineView } from '../pages/time-line-view/time-line-view';
 import { TimeLineCreate } from '../pages/time-line-create/time-line-create';
 import { TimeLineApproval } from '../pages/time-line-approval/time-line-approval';
 import { Profile } from '../pages/profile/profile';
+import { ProfileSponsor } from '../pages/profile-sponsor/profile-sponsor';
 import { TakePicture } from '../pages/take-picture/take-picture';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -62,6 +63,7 @@ const firebaseConfig = {
     TimeLineCreate,
     TimeLineApproval,
     Profile,
+    ProfileSponsor,
     TakePicture,
     Login,
     Signup
@@ -88,6 +90,7 @@ const firebaseConfig = {
     TimeLineCreate,
     TimeLineApproval,
     Profile,
+    ProfileSponsor,
     TakePicture,
     Login,
     Signup

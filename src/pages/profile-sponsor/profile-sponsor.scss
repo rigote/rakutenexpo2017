@@ -1,0 +1,32 @@
+page-profile-sponsor {
+    ion-content{
+        span{
+            margin: 10px 0;
+            float: left;
+            width: 100%;
+            text-align: center;
+            img{
+                width: 70%;
+            }
+            h2,h3,p,small{
+                width: 60%;
+                float: left;
+                white-space: normal;
+            }
+            h2{
+                font-size: 18px;
+                margin: 5px 0 0;
+            }
+        }
+        ion-card{
+            small,p{
+                margin: 10px !important;
+                display: inline-block;
+                text-align: justify;
+            }
+            p{
+                font-size: 12px !important;
+            }
+        }
+    }    
+}
