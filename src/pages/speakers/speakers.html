@@ -5,14 +5,14 @@
     </button>
     <ion-title>Palestrantes</ion-title>
   </ion-navbar>
+</ion-header>
+
+<ion-content>
   <ion-segment *ngIf="_trilhas" [(ngModel)]="trilhas">
     <ion-segment-button *ngFor="let trilha of _trilhas" class="{{trilha.alias}} segment-button" value="{{trilha.alias}}" (click)="ChangeTab(trilha.alias)">
       {{trilha.nome}}
     </ion-segment-button>
   </ion-segment>
-</ion-header>
-
-<ion-content>
   <div [ngSwitch]="trilhas">
     <div *ngFor="let trilha of _trilhas">
       <ion-list *ngSwitchCase="trilha.alias">

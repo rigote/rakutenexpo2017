@@ -16,13 +16,7 @@
     <div *ngIf="_ruby.length > 0">
       <img *ngFor="let item of _ruby" src="{{item.logo}}" alt="{{item.nome}}" (click)="openProfile(item)" />
     </div>
-    <ion-item-divider color="light">
-      Diamond
-    </ion-item-divider>
-    <div *ngIf="_diamond.length > 0">
-      <img *ngFor="let item of _diamond" src="{{item.logo}}" alt="{{item.nome}}" (click)="openProfile(item)" />
-    </div>
-
+    
     <ion-item-divider color="light">
       Gold
     </ion-item-divider>
