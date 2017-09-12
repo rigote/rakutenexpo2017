@@ -16,7 +16,7 @@ export class HowToGet {
   }
 
   openMap(){
-    this.launchNavigator.navigate([-23.6089975, -46.6991569],{
+    this.launchNavigator.navigate([-23.608849, -46.696513],{
       app: this.launchNavigator.APP.USER_SELECT
     }).then(
       success => console.log('Launched navigator'),
