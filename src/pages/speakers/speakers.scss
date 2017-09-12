@@ -92,11 +92,11 @@ page-speakers {
                 }
                 .infoSpeaker{
                     position: absolute;
-                    width: 100%;
+                    right: 0;
+                    width: 67%;
                     bottom: 0;
                     height: 40px;
                     border-top: 1px solid #CCC;
-                    z-index: -9999;
                     .dataInfo{
                         width: 100%;
                         text-align: right;
