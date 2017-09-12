@@ -60,12 +60,12 @@ page-speakers {
     ion-card{
         ion-item{
             padding-left: 0!important;
+            position: relative;
             .item-inner{
                 padding: 0!important;
             }
             ion-label{
                 margin: 0 !important;
-                position: relative !important;
                 img{
                     width: 110px;
                     height: 140px;
@@ -79,8 +79,9 @@ page-speakers {
                     width: 65%;
                     margin: 5px 0 0 5px;
                     h2,p{
-                        display: left;
+                        float: left;
                         white-space: normal;
+                        display: inline-block;
                         width: 100%;
                     }
                     h2{
@@ -92,11 +93,11 @@ page-speakers {
                 }
                 .infoSpeaker{
                     position: absolute;
-                    right: 0;
-                    width: 67%;
+                    width: 100%;
                     bottom: 0;
                     height: 40px;
                     border-top: 1px solid #CCC;
+                    z-index: -9999;
                     .dataInfo{
                         width: 100%;
                         text-align: right;
