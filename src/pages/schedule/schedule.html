@@ -15,22 +15,18 @@
       <ion-item-divider color="light">
         <ion-icon name="time"></ion-icon> {{item}}
       </ion-item-divider>
-      <ion-item-sliding *ngFor="let data of getLecturesByTime(item); let index = index">
-        <ion-item>
-          <ion-thumbnail item-start *ngIf="data.trilhaID != ''">
-            <img src="{{getFotoPalestrantes(data.palestrantes)}}">
-          </ion-thumbnail>
-          <h2>{{getPalestrantesLabel(data.palestrantes)}}</h2>
-          <p>{{data.titulo}}</p>
-          <ion-badge color="{{getTrilhaData(data.trilhaID,2)}}" *ngIf="data.trilhaID != ''">{{getTrilhaData(data.trilhaID,3)}}</ion-badge>
-          <span class="iconCanal" *ngIf="data.trilhaID != ''"><ion-icon name="headset"></ion-icon> {{getTrilhaData(data.trilhaID,1)}}</span>
-        </ion-item>
-        <ion-item-options side="right">
-          <button ion-button color="star" (click)="toggleLecture(data.palestrantes)">
-            <ion-icon name="star"></ion-icon>
-          </button>
-        </ion-item-options>
-      </ion-item-sliding>
+      <ion-item *ngFor="let data of getLecturesByTime(item); let index = index">
+        <ion-thumbnail item-start *ngIf="data.trilhaID != ''">
+          <img src="{{getFotoPalestrantes(data.palestrantes)}}">
+        </ion-thumbnail>
+        <h2>{{getPalestrantesLabel(data.palestrantes)}}</h2>
+        <p>{{data.titulo}}</p>
+        <ion-badge color="{{getTrilhaData(data.trilhaID,2)}}" *ngIf="data.trilhaID != ''">{{getTrilhaData(data.trilhaID,3)}}</ion-badge>
+        <span class="iconCanal" *ngIf="data.trilhaID != ''">
+          <ion-icon name="headset"></ion-icon> {{getTrilhaData(data.trilhaID,1)}} &nbsp;| &nbsp;
+          <ion-icon name="star" color="disabled" (click)="toggleLecture(data.palestrantes)"></ion-icon>
+        </span>        
+      </ion-item>
     </ion-item-group>
   </ion-list>
 </ion-content>

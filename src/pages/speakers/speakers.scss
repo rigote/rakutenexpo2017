@@ -20,13 +20,13 @@ page-speakers {
                     color: color($colors, light);
                 }
                 &.estrategia{
-                    border-color: color($colors-speakers, varejo);
-                    background: color($colors-speakers, varejo);
+                    border-color: color($colors-speakers, estrategia);
+                    background: color($colors-speakers, estrategia);
                     color: color($colors, light);
                 }
                 &.operacoes{
-                    border-color: color($colors-speakers, gestao);
-                    background: color($colors-speakers, gestao);
+                    border-color: color($colors-speakers, operacoes);
+                    background: color($colors-speakers, operacoes);
                     color: color($colors, light);
                 }
             }
@@ -46,12 +46,12 @@ page-speakers {
                     color: color($colors-speakers, inovacao);
                 }
                 &.estrategia{
-                    border-color: color($colors-speakers, varejo);
-                    color: color($colors-speakers, varejo);
+                    border-color: color($colors-speakers, estrategia);
+                    color: color($colors-speakers, estrategia);
                 }
                 &.operacoes{
-                    border-color: color($colors-speakers, gestao);
-                    color: color($colors-speakers, gestao);
+                    border-color: color($colors-speakers, operacoes);
+                    color: color($colors-speakers, operacoes);
                 }
             }
         }

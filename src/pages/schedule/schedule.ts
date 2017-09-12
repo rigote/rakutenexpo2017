@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
 import { Device } from '@ionic-native/device';
 
@@ -19,7 +19,11 @@ export class Schedule {
   public dataAgendamento: any;
   public uuID: any;
 
-  constructor(public navCtrl: NavController, public firebaseProvider: FirebaseProvider, private device: Device) {
+  constructor(
+    public navCtrl: NavController, 
+    public firebaseProvider: FirebaseProvider, 
+    private device: Device,
+    private alertCtrl: AlertController) {
     var root = this;
 
     this.uuID = this.device.uuid || '123456';
@@ -127,7 +131,6 @@ export class Schedule {
   }
 
   public getLecturesByTime(hour: string): Array<any> {
-
     let result: any = [];
 
     for (let i: number = 0; i < this.palestras.length; i++) {
@@ -144,7 +147,7 @@ export class Schedule {
     }
 
     return result;
-
+    
   }
 
   public getPalestrantesLabel(palestrantes: Array<any>): string {
@@ -185,13 +188,25 @@ export class Schedule {
       }
   
       if (scheduled) {
+        let alert = this.alertCtrl.create({
+          title: 'Romovido com sucesso',
+          subTitle: 'Favorito removido com sucesso.',
+          buttons: ['OK']
+        });
         this.firebaseProvider.removeAgendamento(key);
+        alert.present();
       }
       else {
+        let alert = this.alertCtrl.create({
+          title: 'Adicionado com sucesso',
+          subTitle: 'Favorito adicionado com sucesso.',
+          buttons: ['OK']
+        });
         this.firebaseProvider.addAgendamento({
           deviceID: this.uuID,
           palestraID: palestraIDs[0]
         });
+        alert.present();
       }
     }
   }
