@@ -1,8 +1,10 @@
 import { Profile } from './../profile/profile';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
 import { Device } from '@ionic-native/device';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'page-speakers',
@@ -24,7 +26,7 @@ export class Speakers {
   private uuID: any;
   public favoriteFilterSelected: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, private device: Device) {    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, private device: Device, public alertCtrl: AlertController) {    
     this.uuID = this.device.uuid || '123456';
   }
 
@@ -43,9 +45,8 @@ export class Speakers {
             index: this.dataPalestrante[palestrante].index
           });        
         }
-
-        //this._palestrantes = _.sortBy(result, function(obj){ return Math.min(obj.index); });
-        this._palestrantes = result;
+        
+        this._palestrantes = _.orderBy(result, ['index'], ['asc']);        
         break;
       case 2:
         for (var palestra in this.dataPalestra) {        
@@ -60,8 +61,7 @@ export class Speakers {
           });        
         }
         
-        //this._palestras = _.sortBy(result, function(obj){ return Math.min(obj.index); });
-        this._palestras = result;
+        this._palestras = _.orderBy(result, ['index'], ['asc']);
         break;
       case 3:
         for (var trilha in this.dataTrilha) {
@@ -184,13 +184,25 @@ export class Speakers {
     }
 
     if (scheduled) {
+      let alert = this.alertCtrl.create({
+        title: 'Romovido com sucesso',
+        subTitle: 'Favorito removido com sucesso.',
+        buttons: ['OK']
+      });
       this.firebaseProvider.removeAgendamento(key);
+      alert.present();
     }
     else {
+      let alert = this.alertCtrl.create({
+        title: 'Adicionado com sucesso',
+        subTitle: 'Favorito adicionado com sucesso.',
+        buttons: ['OK']
+      });
       this.firebaseProvider.addAgendamento({
         deviceID: this.uuID,
         palestraID: palestraIDs[0]
       });
+      alert.present();
     }
   }
 

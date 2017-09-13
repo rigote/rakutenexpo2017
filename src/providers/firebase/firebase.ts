@@ -30,7 +30,7 @@ export class FirebaseProvider {
     }
 
     public getAllPalestrantes(): any {
-        return this._palestrantes;
+        return this._palestrantes.orderByChild('index');
     }
 
     public getPalestra(id: any): any {

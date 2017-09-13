@@ -3,6 +3,8 @@ import { NavController, AlertController } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
 import { Device } from '@ionic-native/device';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'page-schedule',
   templateUrl: 'schedule.html',
@@ -66,7 +68,7 @@ export class Schedule {
           });
         }
 
-        this.palestras = result;
+        this.palestras = _.orderBy(result, ['index'], ['asc']);
         break;
       case 2:
         for (var palestrante in this.dataPalestrante) {
@@ -80,7 +82,7 @@ export class Schedule {
           });
         }
 
-        this.palestrantes = result;
+        this.palestrantes = _.orderBy(result, ['index'], ['asc']);
         break;
       case 3:
         for (var trilha in this.dataTrilha) {
