@@ -17,32 +17,26 @@
     <div *ngFor="let trilha of _trilhas">
       <ion-list *ngSwitchCase="trilha.alias">
         <ion-card *ngFor="let palestrante of getPalestrantes(trilha.key)">
-          <ion-item>
-              <img src="{{palestrante.foto}}" (click)="openProfile(palestrante)">
-              <h2>{{palestrante.nome}}</h2>
-              <p>{{palestrante.ocupacao}}</p>
-              <p><ion-icon name="time"></ion-icon> {{getLectureTime(palestrante.key)}}</p>
-              <p><ion-icon name="headset"></ion-icon> {{getChannel(palestrante.key)}}</p>
-              <p>
-                <button ion-button icon-only (click)="toggleLecture(palestrante)">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-auto>
+                <img src="{{palestrante.foto}}" (click)="openProfile(palestrante)">
+              </ion-col>
+              <ion-col col-6>
+                <div class="dataSpeaker" (click)="openProfile(palestrante)">
+                  <h2>{{palestrante.nome}}</h2>
+                  <p>{{palestrante.ocupacao}}</p>
+                </div>
+              </ion-col>
+              <ion-col col-2 class="infoSpeaker">
+                <span><ion-icon name="time"></ion-icon> {{getLectureTime(palestrante.key)}}</span>
+                <span><ion-icon name="headset"></ion-icon> {{getChannel(palestrante.key)}}</span>
+                <button ion-button icon-only clear (click)="toggleLecture(palestrante)">
                   <ion-icon name="star" color="disabled"></ion-icon>
                 </button>
-              </p>
-            <!--<img src="{{palestrante.foto}}" (click)="openProfile(palestrante)">
-            <div class="dataSpeaker" (click)="openProfile(palestrante)">
-              <h2>{{palestrante.nome}}</h2>
-              <p>{{palestrante.ocupacao}}</p>
-            </div>
-            <div class="infoSpeaker">
-              <div class="dataInfo">
-                <span><ion-icon name="time"></ion-icon> {{getLectureTime(palestrante.key)}}</span>
-                <span class="separator"></span>
-                <span><ion-icon name="headset"></ion-icon> {{getChannel(palestrante.key)}}</span>
-                <span class="separator"></span>
-                <span><ion-icon name="star" color="disabled" (click)="toggleLecture(palestrante)"></ion-icon></span>
-              </div>
-            </div>-->
-          </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-card>
       </ion-list>
     </div>

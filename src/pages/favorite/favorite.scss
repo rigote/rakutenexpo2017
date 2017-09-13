@@ -1,27 +1,23 @@
 page-favorite {
     ion-content{
         ion-card{
-            ion-item{
-                padding-left: 0!important;
+            ion-grid{
+                padding: 0!important;
                 .item-inner{
                     padding: 0!important;
                 }
-                ion-label{
-                    margin: 0 !important;
+                ion-col{
+                    padding: 0 !important;
+                    :first{
+                        padding-right: 10px !important;
+                    }
                     img{
                         width: 110px;
                         height: 140px;
-                        //border-radius: 50%;
-                        float: left;
-                        z-index: 9999;
-                        background: #FFF;
                     }
                     .dataSpeaker{
-                        float: left;
-                        width: 65%;
-                        margin: 5px 0 0 5px;
+                        padding: 5px !important;
                         h2,p{
-                            float: left;
                             white-space: normal;
                             display: inline-block;
                             width: 100%;
@@ -33,26 +29,15 @@ page-favorite {
                             font-size: 12px;
                         }
                     }
-                    .infoSpeaker{
-                        position: absolute;
-                        width: 100%;
-                        bottom: 0;
-                        height: 40px;
-                        border-top: 1px solid #CCC;
-                        z-index: -9999;
-                        .dataInfo{
-                            width: 100%;
-                            text-align: right;
-                            line-height: 40px;
-                            z-index: 9999;
-                            span{
-                                z-index: 9999;
-                                padding: 0 5px;
-                                &.separator{
-                                    padding: 2px;
-                                    border-left: 1px dashed #CCC;
-                                }
-                            }
+                    &.infoSpeaker{
+                        border-left: 1px solid color($colors, disabled);
+                        padding: 5px;
+                        text-align: center;
+                        span{
+                            display: block;
+                            height: 30px;
+                            margin: 10px 0;
+                            line-height: 30px;
                         }
                     }
                 }

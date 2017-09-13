@@ -11,25 +11,29 @@
 <ion-content>
   <ion-list>
     <ion-card *ngFor="let palestrante of getPalestrantes()">
-      <ion-item>
-        <img src="{{palestrante.foto}}" (click)="openProfile(palestrante)">
-        <div class="dataSpeaker" (click)="openProfile(palestrante)">
-          <h2>{{palestrante.nome}}</h2>
-          <p>{{palestrante.ocupacao}}</p>
-        </div>
-        <div class="infoSpeaker">
-          <div class="dataInfo">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-auto>
+            <img src="{{palestrante.foto}}" (click)="openProfile(palestrante)">
+          </ion-col>
+          <ion-col col-6>
+            <div class="dataSpeaker" (click)="openProfile(palestrante)">
+              <h2>{{palestrante.nome}}</h2>
+              <p>{{palestrante.ocupacao}}</p>
+            </div>
+          </ion-col>
+          <ion-col col-2 class="infoSpeaker">
             <span><ion-icon name="time"></ion-icon> {{getLectureTime(palestrante.key)}}</span>
-            <span class="separator"></span>
             <span><ion-icon name="headset"></ion-icon> {{getChannel(palestrante.key)}}</span>
-            <span class="separator"></span>
-            <span><ion-icon name="star" color="star" (click)="toggleLecture(palestrante)"></ion-icon></span>
-          </div>
-        </div>
-      </ion-item>
-    </ion-card>    
+            <button ion-button icon-only clear (click)="toggleLecture(palestrante)">
+                <ion-icon name="star" color="star"></ion-icon>
+              </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
   </ion-list>
   <div *ngIf="getPalestrantes().length == 0">
-      Não há palestrantes marcados como favoritos.
+    Não há palestrantes marcados como favoritos.
   </div>
 </ion-content>
