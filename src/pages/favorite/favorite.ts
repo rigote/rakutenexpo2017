@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
 import { Device } from '@ionic-native/device';
-
 import { Profile } from './../profile/profile';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'page-favorite',
@@ -26,7 +27,7 @@ export class Favorite {
     this.uuID = this.device.uuid || '123456';
 
     this.firebaseProvider.getAllPalestrantes().on('value', (data) => {
-      root.dataPalestrante = data.val();      
+      root.dataPalestrante = data.val();
       root.initializeItems(1);
     });
 
@@ -43,7 +44,7 @@ export class Favorite {
     this.firebaseProvider.getAgendamentoByUUID(root.uuID).on('value', (data) => {
       root.dataAgendamento = data.val();
       root.initializeItems(4);
-    });    
+    });
   }
 
   public getPalestrantes(): Array<any> {
@@ -57,13 +58,13 @@ export class Favorite {
       }
     }
 
-    return palestrantes;    
+    return palestrantes;
   }
 
   public getLectureTime(key): any {
     let result: string = "";
 
-    for (var palestra in this._palestras) {  
+    for (var palestra in this._palestras) {
       if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(key) > -1) {
         result = this._palestras[palestra].horario;
         break;
@@ -76,7 +77,7 @@ export class Favorite {
   public getLecture(key): any {
     let result: string = "";
 
-    for (var palestra in this._palestras) {  
+    for (var palestra in this._palestras) {
       if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(key) > -1) {
         result = this._palestras[palestra];
         break;
@@ -89,14 +90,14 @@ export class Favorite {
   public getChannel(key): any {
     let result: string = "";
 
-    for (var palestra in this._palestras) {  
+    for (var palestra in this._palestras) {
       if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(key) > -1) {
         for (var trilha in this._trilhas) {
           if (this._trilhas[trilha].key == this._palestras[palestra].trilhaID) {
             result = this._trilhas[trilha].canal;
             break;
-          }            
-        }        
+          }
+        }
         break;
       }
     }
@@ -104,59 +105,63 @@ export class Favorite {
     return result;
   }
 
-  public toggleLecture(item: Array<any>) {
-    if (item.length > 0){
-      let palestraIDs: Array<any> = [];
-      
-      for (var palestra in this._palestras) {
-        if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(item[0].key) > -1) {
-          for (var palestrante in this._palestras[palestra].palestranteIDs) {
-            palestraIDs.push(this._palestras[palestra].palestranteIDs[palestrante]);
-          }
+  public IsFavorited(key): boolean {
+    return _.find(this._agendamentos, function (a) { return a.palestraID == key; }) != undefined;
+  }
+
+  public toggleLecture(item: any) {
+    let palestraIDs: Array<any> = [];
+
+    for (var palestra in this._palestras) {
+      if (typeof this._palestras[palestra].palestranteIDs != 'undefined' && this._palestras[palestra].palestranteIDs.indexOf(item.key) > -1) {
+        for (var palestrante in this._palestras[palestra].palestranteIDs) {
+          palestraIDs.push(this._palestras[palestra].palestranteIDs[palestrante]);
         }
       }
-  
-      let scheduled: boolean = false;
-      let key: any;
-  
-      for (var agendamento in this._agendamentos) {
-        if (this._agendamentos[agendamento].deviceID == this.uuID && this._agendamentos[agendamento].palestraID == palestraIDs[0]) {
-          scheduled = true;
-          key = this._agendamentos[agendamento].key;
-          break;
-        }
+    }
+
+    let scheduled: boolean = false;
+    let key: any;
+
+    for (var agendamento in this._agendamentos) {
+      if (this._agendamentos[agendamento].deviceID == this.uuID && this._agendamentos[agendamento].palestraID == palestraIDs[0]) {
+        scheduled = true;
+        key = this._agendamentos[agendamento].key;
+        break;
       }
-  
-      if (scheduled) {
-        let alert = this.alertCtrl.create({
-          title: 'Romovido com sucesso',
-          subTitle: 'Favorito removido com sucesso.',
-          buttons: ['OK']
-        });
-        this.firebaseProvider.removeAgendamento(key);
-        alert.present();
-      }
-      else {
-        let alert = this.alertCtrl.create({
-          title: 'Adicionado com sucesso',
-          subTitle: 'Favorito adicionado com sucesso.',
-          buttons: ['OK']
-        });
-        this.firebaseProvider.addAgendamento({
-          deviceID: this.uuID,
-          palestraID: palestraIDs[0]
-        });
-        alert.present();
-      }
+    }
+
+    if (scheduled) {
+      let alert = this.alertCtrl.create({
+        title: 'Romovido com sucesso',
+        subTitle: 'Favorito removido com sucesso.',
+        buttons: ['OK']
+      });
+      this.firebaseProvider.removeAgendamento(key);
+      alert.present();
+      this.initializeItems(4);
+    }
+    else {
+      let alert = this.alertCtrl.create({
+        title: 'Adicionado com sucesso',
+        subTitle: 'Favorito adicionado com sucesso.',
+        buttons: ['OK']
+      });
+      this.firebaseProvider.addAgendamento({
+        deviceID: this.uuID,
+        palestraID: palestraIDs[0]
+      });
+      alert.present();
+      this.initializeItems(4);
     }
   }
 
   private initializeItems(type: number) {
-    var result = [];    
-    
+    var result = [];
+
     switch (type) {
       case 1:
-        for (var palestrante in this.dataPalestrante) {        
+        for (var palestrante in this.dataPalestrante) {
           result.push({
             key: palestrante,
             nome: this.dataPalestrante[palestrante].nome,
@@ -164,14 +169,14 @@ export class Favorite {
             descricao: this.dataPalestrante[palestrante].descricao,
             foto: this.dataPalestrante[palestrante].foto,
             index: this.dataPalestrante[palestrante].index
-          });        
+          });
         }
 
         //this._palestrantes = _.sortBy(result, function(obj){ return Math.min(obj.index); });
         this._palestrantes = result;
         break;
       case 2:
-        for (var palestra in this.dataPalestra) {        
+        for (var palestra in this.dataPalestra) {
           result.push({
             key: palestra,
             index: this.dataPalestra[palestra].index,
@@ -180,9 +185,9 @@ export class Favorite {
             horario: this.dataPalestra[palestra].horario,
             trilhaID: this.dataPalestra[palestra].trilhaID,
             palestranteIDs: this.dataPalestra[palestra].palestranteIDs
-          });        
+          });
         }
-        
+
         //this._palestras = _.sortBy(result, function(obj){ return Math.min(obj.index); });
         this._palestras = result;
         break;
@@ -193,31 +198,31 @@ export class Favorite {
             canal: this.dataTrilha[trilha].canal,
             nome: this.dataTrilha[trilha].nome,
             alias: this.dataTrilha[trilha].alias
-          });   
+          });
         }
 
         this._trilhas = result;
         break;
       case 4:
-        for (var agendamento in this.dataAgendamento) {        
+        for (var agendamento in this.dataAgendamento) {
           result.push({
             key: agendamento,
             deviceID: this.dataAgendamento[agendamento].deviceID,
             palestraID: this.dataAgendamento[agendamento].palestraID //palestranteID
-          });        
+          });
         }
         console.log(result);
         this._agendamentos = result;
         break;
     }
-    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Favorite');
   }
 
-  openProfile(profile: any){
+  openProfile(profile: any) {
     this.navCtrl.push(Profile, { profile: profile, lecture: this.getLecture(profile.key) });
   }
 

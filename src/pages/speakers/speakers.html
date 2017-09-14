@@ -32,7 +32,7 @@
                 <span><ion-icon name="time"></ion-icon> {{getLectureTime(palestrante.key)}}</span>
                 <span><ion-icon name="headset"></ion-icon> {{getChannel(palestrante.key)}}</span>
                 <button ion-button icon-only clear (click)="toggleLecture(palestrante)">
-                  <ion-icon name="star" color="disabled"></ion-icon>
+                  <ion-icon name="star" color="{{ IsFavorited(palestrante.key) ? 'star' : 'disabled' }}"></ion-icon>
                 </button>
               </ion-col>
             </ion-row>

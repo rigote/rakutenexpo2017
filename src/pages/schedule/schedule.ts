@@ -110,6 +110,13 @@ export class Schedule {
     }
   }
 
+  public IsFavorited(item: Array<any>): boolean {     
+    if (item.length > 0)   
+      return _.find(this.agendamentos, function(a) { return a.palestraID == item[0].key; }) != undefined;
+    else
+      return false;
+  }
+
   public getTimeList(): Array<string> {
 
     let result: any = [];
@@ -197,6 +204,7 @@ export class Schedule {
         });
         this.firebaseProvider.removeAgendamento(key);
         alert.present();
+        this.initializeItems(4);
       }
       else {
         let alert = this.alertCtrl.create({
@@ -209,6 +217,7 @@ export class Schedule {
           palestraID: palestraIDs[0]
         });
         alert.present();
+        this.initializeItems(4);
       }
     }
   }

@@ -92,6 +92,10 @@ export class Speakers {
     
   }
 
+  public IsFavorited(key): boolean {        
+    return _.find(this._agendamentos, function(a) { return a.palestraID == key; }) != undefined;
+  }
+
   public ChangeTab(value: string){
     this.trilhas = value;
   }
@@ -191,6 +195,7 @@ export class Speakers {
       });
       this.firebaseProvider.removeAgendamento(key);
       alert.present();
+      this.initializeItems(4);
     }
     else {
       let alert = this.alertCtrl.create({
@@ -203,6 +208,7 @@ export class Speakers {
         palestraID: palestraIDs[0]
       });
       alert.present();
+      this.initializeItems(4);
     }
   }
 

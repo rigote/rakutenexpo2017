@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { BannerProvider } from '../../providers/banner/banner';
 
 @Component({
   selector: 'page-how-to-get',
@@ -8,11 +9,19 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 })
 export class HowToGet {
 
-  constructor(public navCtrl: NavController, private launchNavigator: LaunchNavigator) {
+  public banner: any;
+
+  constructor(public navCtrl: NavController, private launchNavigator: LaunchNavigator, public bannerProvider: BannerProvider) {
+  }
+
+  getRandomBanner(): any{
+    this.bannerProvider.getRandomBanner().then(banner => {
+      this.banner = banner;
+    });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HowToGet');
+    this.getRandomBanner();
   }
 
   openMap(){

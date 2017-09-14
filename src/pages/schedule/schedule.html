@@ -24,7 +24,7 @@
         <ion-badge color="{{getTrilhaData(data.trilhaID,2)}}" *ngIf="data.trilhaID != ''">{{getTrilhaData(data.trilhaID,3)}}</ion-badge>
         <span class="iconCanal" *ngIf="data.trilhaID != ''">
           <ion-icon name="headset"></ion-icon> {{getTrilhaData(data.trilhaID,1)}} &nbsp;| &nbsp;
-          <ion-icon name="star" color="disabled" (click)="toggleLecture(data.palestrantes)"></ion-icon>
+          <ion-icon name="star" color="{{ IsFavorited(data.palestrantes) ? 'star' : 'disabled' }}" (click)="toggleLecture(data.palestrantes)"></ion-icon>
         </span>        
       </ion-item>
     </ion-item-group>
