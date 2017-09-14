@@ -7,14 +7,14 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class OnesignalProvider {
 
-  private API_URL = 'https://onesignal.com/api/v1/notifications?app_id=ffbfe53b-19d8-4ec0-874a-d5f89b8200e9'
+  private API_URL = 'https://onesignal.com/api/v1/notifications?app_id=648977f6-76f0-4433-b129-afe4d49cef96'
 
   constructor(public http: Http) {
     console.log('Hello OnesignalProvider Provider');
   }
 
   createAuthorizationHeader(headers: Headers) {
-    headers.append('Authorization', 'Basic N2QwYTA0ZGQtYzk1NC00MmMyLWJmYzMtMDdjYWQ0Y2IzNjhj'); 
+    headers.append('Authorization', 'Basic OWUxMTU2ZWQtNjFlYi00NWY3LTk0NzktN2U5YWQyOTI1YWUw'); 
   }
 
   getNotifications(){

@@ -54,6 +54,19 @@ export class MyApp {
       this.statusBar.overlaysWebView(true);
       this.statusBar.backgroundColorByHexString('#C00303');
       this.getBanner();
+
+      /*IMPLEMENT ONESIGNAL*/
+      var notificationOpenedCallback = function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      };
+    
+      window["plugins"].OneSignal
+        .startInit("648977f6-76f0-4433-b129-afe4d49cef96", "349321711763")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
+        
+      /**END IMPLEMENT ONESIGNAL */
+
     });    
   }
 
