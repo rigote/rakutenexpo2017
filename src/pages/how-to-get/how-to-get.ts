@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
-import { BannerProvider } from '../../providers/banner/banner';
+import { BannerProvider, Banner } from '../../providers/banner/banner';
 
 @Component({
   selector: 'page-how-to-get',
@@ -9,7 +9,7 @@ import { BannerProvider } from '../../providers/banner/banner';
 })
 export class HowToGet {
 
-  public banner: any;
+  public banner: Banner = null;
 
   constructor(public navCtrl: NavController, private launchNavigator: LaunchNavigator, public bannerProvider: BannerProvider) {
   }

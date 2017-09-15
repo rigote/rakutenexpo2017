@@ -13,7 +13,7 @@ import { Sponsors } from '../pages/sponsors/sponsors';
 import { Favorite } from '../pages/favorite/favorite';
 import { HowToGet } from '../pages/how-to-get/how-to-get';
 import { TimeLineView } from '../pages/time-line-view/time-line-view';
-import { BannerProvider } from '../providers/banner/banner';
+import { BannerProvider, Banner } from '../providers/banner/banner';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +21,7 @@ import { BannerProvider } from '../providers/banner/banner';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  banner: any;
+  banner: Banner = null;
 
   rootPage: any = Login;
 
@@ -56,15 +56,21 @@ export class MyApp {
       this.getBanner();
 
       /*IMPLEMENT ONESIGNAL*/
-      var notificationOpenedCallback = function(jsonData) {
-        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-      };
-    
-      window["plugins"].OneSignal
-        .startInit("648977f6-76f0-4433-b129-afe4d49cef96", "349321711763")
-        .handleNotificationOpened(notificationOpenedCallback)
-        .endInit();
-        
+      
+      try{
+        var notificationOpenedCallback = function(jsonData) {
+          console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+        };
+      
+        window["plugins"].OneSignal
+          .startInit("648977f6-76f0-4433-b129-afe4d49cef96", "349321711763")
+          .handleNotificationOpened(notificationOpenedCallback)
+          .endInit();
+      }
+      catch(e){
+        console.log(e);
+      }
+      
       /**END IMPLEMENT ONESIGNAL */
 
     });    

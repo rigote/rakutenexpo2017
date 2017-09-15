@@ -6,14 +6,14 @@ import { FirebaseProvider } from './../firebase/firebase';
 @Injectable()
 export class BannerProvider {
 
-  private banners: Array<any> = [];
+  private banners: Array<Banner> = [];
 
   constructor(public http: Http, public firebaseProvider: FirebaseProvider) {
   }
 
-  public getRandomBanner(): any {
+  public getRandomBanner(): Promise<Banner> {
     
-    let promise = new Promise((resolve, reject) => {
+    let promise: Promise<Banner> = new Promise((resolve, reject) => {
 
       this.firebaseProvider.getAllBanners().on('value', (data) => {
   
@@ -42,4 +42,12 @@ export class BannerProvider {
     
   }  
 
+}
+
+export class Banner {
+  public key: string = "";
+  public nome: string = "";
+  public imagemMenu: string = "";
+  public imagemView: string = "";
+  public link: string = "";
 }
