@@ -1,3 +1,18 @@
 page-home {
-
+  ion-content {
+    padding-bottom: 100px;
+    &.has-banner{
+        .scroll-content {
+            margin-bottom: 60px;
+        }
+    }    
+  }
+  ion-footer {
+    .banner {
+      width: 100%;
+      height: 60px;
+      background: #069;
+      color: #FFF !important;
+    }
+  }
 }

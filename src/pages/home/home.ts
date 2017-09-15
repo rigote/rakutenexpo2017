@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { BannerProvider, Banner } from '../../providers/banner/banner';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +8,20 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  public banner: Banner = null;
 
+  constructor(public navCtrl: NavController, public bannerProvider: BannerProvider) {
+
+  }
+
+  getRandomBanner(): any{
+    this.bannerProvider.getRandomBanner().then(banner => {
+      this.banner = banner;
+    });
+  }
+
+  ionViewDidLoad() {
+    this.getRandomBanner();
   }
 
 }

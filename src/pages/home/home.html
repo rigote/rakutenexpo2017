@@ -7,9 +7,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding [ngClass]="{'has-banner' : (banner != null)}">
   <img src="http://lorempixel.com/400/200" />
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin imperdiet aliquet lorem at finibus. Nam ornare dolor ante, quis fermentum metus malesuada sed. Nunc in tellus quis urna pharetra sodales eu eu lectus. Aenean eu rhoncus libero, quis mattis orci. Ut ultricies metus ac odio dignissim, ullamcorper feugiat mauris tincidunt. Nulla lacinia non nisl vel malesuada. Duis at eros eget eros sagittis ullamcorper. Suspendisse blandit nunc ut mi egestas, eget elementum nunc porttitor. Quisque ac lectus rutrum, ullamcorper tortor id, vulputate enim. Ut sit amet mi est.
   <img src="http://lorempixel.com/400/200" />
   <p>Aliquam dignissim, sem ut tincidunt facilisis, purus turpis suscipit purus, et ullamcorper magna sem a sapien. Morbi vulputate nec magna vel fringilla. Ut ex mi, commodo ac pharetra at, accumsan vel risus. Aliquam lorem mi, mollis ac urna ac, ullamcorper varius mi. Fusce faucibus ultricies sollicitudin. In non risus vitae enim convallis porttitor. Nam rutrum nibh quam, sit amet aliquam orci viverra et. Proin hendrerit in leo nec pretium. Mauris velit erat, luctus hendrerit risus sed, semper ultrices urna. Suspendisse feugiat nibh nec est porttitor, ac malesuada lacus ultrices. Sed orci lectus, vehicula et gravida vitae, lobortis nec massa. Pellentesque blandit turpis sed enim scelerisque vestibulum.</p>
 </ion-content>
+
+<ion-footer>
+  <div class="banner" *ngIf="banner != null">
+    <a href="{{banner != null ? banner.link : '#!'}}"><img src="{{banner != null ? banner.imagemMenu : '#'}}" alt="{{banner != null ? banner.nome : '-'}}" title="{{banner != null ? banner.nome : '-'}}" /></a>{{banner != null ? banner.nome : '-'}}
+  </div>
+</ion-footer>
