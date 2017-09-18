@@ -26,9 +26,9 @@ export class TimeLineView {
   ) {
   }
 
-  getRandomBanner(index): any{
+  getRandomBanner(post){
     this.bannerProvider.getRandomBanner().then(banner => {
-      this.posts[index].banner = banner;
+      post.banner = banner;
     });
   }
 
@@ -45,7 +45,7 @@ export class TimeLineView {
       this.posts = posts.reverse();
       
       for(let i = 0; i < this.posts.length; i++) {
-        this.posts[i].banner = null;
+        this.getRandomBanner(this.posts[i]);
       }
 
       loader.dismiss();
