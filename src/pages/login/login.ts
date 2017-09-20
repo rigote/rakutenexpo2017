@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
 import { LoadingController, NavController, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -25,9 +26,15 @@ export class Login{
     email: ''
   }
 
+  profile = {
+    "email": "",
+    "authorization": "0"
+  }
+
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
+    private afDatabase: AngularFireDatabase,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
     public facebookAuth: Facebook,
@@ -77,6 +84,10 @@ export class Login{
     this.facebookAuth.login(['email']).then(res=>{
       const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
       firebase.auth().signInWithCredential(fc).then(fs=>{
+        this.profile.email = this.facebook.email;
+        this.afAuth.authState.subscribe(auth => {
+          this.afDatabase.object(`profile/${auth.uid}`).set(this.profile);
+        })
         let loader = this.loadingCtrl.create({ content: "Autenticando..." });
         loader.present();
         console.log(res);

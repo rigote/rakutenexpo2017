@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, LoadingController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { TakePicture } from '../take-picture/take-picture';
@@ -15,7 +15,9 @@ export class TimeLineView {
 
   public posts: any[] = [];
   public user: string = '';
-
+  
+  profileData: FirebaseObjectObservable<any>
+  
   constructor(
     public navCtrl: NavController, 
     public modalCtrl: ModalController, 
@@ -35,6 +37,10 @@ export class TimeLineView {
   ionViewDidLoad() {
     let loader = this.loadingCtrl.create({ content: "Carregando..." });
     loader.present();
+    this.afAuth.authState.subscribe(data=>{
+      this.profileData = this.db.object(`profile/${data.uid}`)
+    })
+    
 
     this.db.list('/posts', {
       query: {

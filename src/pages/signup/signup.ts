@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -12,11 +13,16 @@ import { Login } from '../login/login';
 export class Signup {
 
   public form: FormGroup;
+  profile = {
+    "email": "",
+    "authorization": "0"
+  }
 
   constructor(
     public navCtrl: NavController,
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
+    private afDatabase: AngularFireDatabase,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController) {
     this.form = this.fb.group({
@@ -40,6 +46,10 @@ export class Signup {
     this.afAuth.auth
       .createUserWithEmailAndPassword(this.form.controls['email'].value, this.form.controls['password'].value)
       .then(() => {
+        this.profile.email = this.form.controls['email'].value;
+        this.afAuth.authState.subscribe(auth => {
+          this.afDatabase.object(`profile/${auth.uid}`).set(this.profile);
+        })
         loader.dismiss();
         let alert = this.alertCtrl.create({
           title: 'Bem vindo!',
