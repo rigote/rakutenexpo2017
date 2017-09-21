@@ -8,11 +8,12 @@ page-home {
     }    
   }
   ion-footer {
+    background-color: color($colors, light);
     .banner {
       width: 100%;
       height: 60px;
-      background: #069;
       color: #FFF !important;
+      text-align: center;
     }
   }
 }

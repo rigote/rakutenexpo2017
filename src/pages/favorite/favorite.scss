@@ -29,14 +29,13 @@ page-favorite {
                             font-size: 12px;
                         }
                     }
-                    &.infoSpeaker{
+                    .infoSpeaker{
                         padding: 5px;
                         text-align: center;
                         span{
-                            display: block;
+                            padding: 2px 5px;
                             height: 30px;
-                            margin: 10px 0;
-                            line-height: 30px;
+                            display: inline-block;
                         }
                     }
                 }

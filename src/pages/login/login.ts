@@ -84,13 +84,14 @@ export class Login{
     this.facebookAuth.login(['email']).then(res=>{
       const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken)
       firebase.auth().signInWithCredential(fc).then(fs=>{
-        this.profile.email = this.facebook.email;
-        this.afAuth.authState.subscribe(auth => {
-          this.afDatabase.object(`profile/${auth.uid}`).set(this.profile);
-        })
         let loader = this.loadingCtrl.create({ content: "Autenticando..." });
         loader.present();
         console.log(res);
+        this.profile.email = this.facebook.email;
+        console.log(this.profile.email);
+        this.afAuth.authState.subscribe(auth => {
+          this.afDatabase.object(`profile/${auth.uid}`).set(this.profile);
+        })
         loader.dismiss();
       }).catch(ferror=>{
         let alert = this.alertCtrl.create({

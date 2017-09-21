@@ -3,26 +3,33 @@ page-schedule {
   ion-list {
     ion-item {
       padding-left: 0 !important;
-      img{
+      img {
         width: 80px !important;
         height: 98px !important;
       }
-      h2 {
-        font-size: 15px !important;
-        white-space: normal;
-      }
-      p {
-        font-size: 12px !important;
-        white-space: normal;
-        text-align: justify;
-      }
-      .iconCanal {
-        float: right;
+      ion-grid {
+        ion-row {
+          h2 {
+            font-size: 15px !important;
+            white-space: normal;
+            display: block;
+            width: 100%;
+          }
+          p {
+            font-size: 12px !important;
+            white-space: normal;
+            text-align: justify;
+          }
+          ion-col {
+            ion-badge {
+              font-size: 10px;
+              text-shadow: $text-shadow;
+              color: #FFF !important;
+              margin: 0;
+            }
+          }
+        }
       }
     }
-  }
-  ion-badge {
-    font-size: 10px;
-    text-shadow: $text-shadow;
   }
 }

@@ -19,13 +19,23 @@
         <ion-thumbnail item-start *ngIf="data.trilhaID != ''">
           <img src="{{getFotoPalestrantes(data.palestrantes)}}">
         </ion-thumbnail>
-        <h2>{{getPalestrantesLabel(data.palestrantes)}}</h2>
-        <p>{{data.titulo}}</p>
-        <ion-badge color="{{getTrilhaData(data.trilhaID,2)}}" *ngIf="data.trilhaID != ''">{{getTrilhaData(data.trilhaID,3)}}</ion-badge>
-        <span class="iconCanal" *ngIf="data.trilhaID != ''">
-          <ion-icon name="headset"></ion-icon> {{getTrilhaData(data.trilhaID,1)}} &nbsp;| &nbsp;
-          <ion-icon name="star" color="{{ IsFavorited(data.palestrantes) ? 'star' : 'disabled' }}" (click)="toggleLecture(data.palestrantes)"></ion-icon>
-        </span>        
+        <ion-grid>
+          <ion-row>
+            <h2>{{getPalestrantesLabel(data.palestrantes)}}</h2>
+            <p>{{data.titulo}}</p>
+          </ion-row>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-badge color="{{getTrilhaData(data.trilhaID,2)}}" *ngIf="data.trilhaID != ''">{{getTrilhaData(data.trilhaID,3)}}</ion-badge>
+            </ion-col>
+              <ion-col col-auto *ngIf="data.trilhaID != ''">
+                <ion-icon name="headset"></ion-icon> {{getTrilhaData(data.trilhaID,1)}}
+              </ion-col>
+              <ion-col col-auto *ngIf="data.trilhaID != ''">
+                <ion-icon name="star" color="{{ IsFavorited(data.palestrantes) ? 'star' : 'disabled' }}" (click)="toggleLecture(data.palestrantes)"></ion-icon>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
     </ion-item-group>
   </ion-list>
