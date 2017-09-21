@@ -80,10 +80,6 @@
     "description": "RK-EXPO17: An Ionic project",
     "cordova": {
         "plugins": {
-            "cordova-plugin-camera": {
-                "CAMERA_USAGE_DESCRIPTION": " ",
-                "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
-            },
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-splashscreen": {},
@@ -97,7 +93,11 @@
             "uk.co.workingedge.phonegap.plugin.launchnavigator": {
                 "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
             },
-            "onesignal-cordova-plugin": {}
+            "onesignal-cordova-plugin": {},
+            "cordova-plugin-camera": {
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": "Este app necessita acessar sua biblioteca de imagens para poder enviar imagens para a timeline do evento",
+                "CAMERA_USAGE_DESCRIPTION": "Este app necessita acessar sua camera para poder enviar imagens para a timeline do evento"
+            }
         },
         "platforms": [
             "ios"
