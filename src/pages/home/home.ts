@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { BannerProvider, Banner } from '../../providers/banner/banner';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'page-home',
@@ -9,8 +10,12 @@ import { BannerProvider, Banner } from '../../providers/banner/banner';
 export class HomePage {
 
   public banner: Banner = null;
+  public conteudo: any[] = [];
 
-  constructor(public navCtrl: NavController, public bannerProvider: BannerProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public bannerProvider: BannerProvider, 
+    public db: AngularFireDatabase) {
 
   }
 
@@ -22,6 +27,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.getRandomBanner();
+    this.db.list('data/informacoes',{}).subscribe(data=>this.conteudo = data);
   }
 
 }
