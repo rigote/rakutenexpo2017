@@ -9,13 +9,15 @@
 
 <ion-content padding [ngClass]="{'has-banner' : (banner != null)}">
   <div *ngFor="let content of conteudo">
-    <img src="{{content.sobreimagem}}" alt="">
+    <img src="{{content.sobreimagem}}" alt="" [hidden]="!content.sobreimagem">
     <div innerHTML="{{content.sobre}}"></div>
-    <h4>Dados de Wi-Fi</h4>
-    <p>
-      <span><ion-icon name="wifi"></ion-icon> {{content.ssid}}</span><br>
-      <span><ion-icon name="key"></ion-icon> {{content.senha}}</span>
-    </p>
+    <div class="dadosWifi" [hidden]="!content.ssid || !content.senha">
+      <h4>Dados de Wi-Fi</h4>
+      <p>
+        <span><ion-icon name="wifi"></ion-icon> {{content.ssid}}</span><br>
+        <span><ion-icon name="key"></ion-icon> {{content.senha}}</span>
+      </p>
+    </div>
   </div>
 </ion-content>
 
