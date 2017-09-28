@@ -37,7 +37,7 @@ export class MyApp {
       { title: 'Palestrantes', component: Speakers, icon: 'contacts' },
       { title: 'Favorito', component: Favorite, icon: 'star' },
       { title: 'Patrocinadores', component: Sponsors, icon: 'people' },
-      { title: 'Time Line', component: TimeLineView, icon: 'git-merge' },
+      { title: 'Timeline', component: TimeLineView, icon: 'git-merge' },
       { title: 'Notificações', component: Notifications, icon: 'notifications' }      
     ];    
   }
