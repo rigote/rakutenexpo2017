@@ -3,9 +3,17 @@ page-schedule {
   ion-list {
     ion-item {
       padding-left: 0 !important;
-      img {
-        width: 80px !important;
-        height: 98px !important;
+      .item-inner{
+        padding-right: 0 !important;
+      }
+      ion-label{
+        margin-right: 0 !important;
+      }
+      ion-thumbnail {
+        img{
+          width: 80px !important;
+          height: 98px !important;
+        }        
       }
       ion-grid {
         ion-row {

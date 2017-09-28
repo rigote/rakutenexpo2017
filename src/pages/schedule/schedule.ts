@@ -64,6 +64,7 @@ export class Schedule {
             descricao: this.dataPalestra[palestra].descricao,
             horario: this.dataPalestra[palestra].horario,
             trilhaID: this.dataPalestra[palestra].trilhaID,
+            keynote: this.dataPalestra[palestra].keynote,
             palestranteIDs: this.dataPalestra[palestra].palestranteIDs
           });
         }
@@ -150,7 +151,8 @@ export class Schedule {
           titulo: this.palestras[i].titulo,
           descricao: this.palestras[i].descricao,
           palestrantes: this.getPalestrantes(this.palestras[i].palestranteIDs),
-          trilhaID: this.palestras[i].trilhaID
+          trilhaID: this.palestras[i].trilhaID,
+          keynote: this.palestras[i].keynote
         });
       }
     }

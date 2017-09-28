@@ -16,10 +16,11 @@
         <ion-icon name="time"></ion-icon> {{item}}
       </ion-item-divider>
       <ion-item *ngFor="let data of getLecturesByTime(item); let index = index">
-        <ion-thumbnail item-start *ngIf="data.trilhaID != ''">
+        <img [hidden]="data.keynote != 1" src="{{getFotoPalestrantes(data.palestrantes)}}" alt="">
+        <ion-thumbnail item-start *ngIf="data.trilhaID != ''" [hidden]="data.keynote == 1">
           <img src="{{getFotoPalestrantes(data.palestrantes)}}">
         </ion-thumbnail>
-        <ion-grid>
+        <ion-grid [hidden]="data.keynote == 1">
           <ion-row>
             <h2>{{getPalestrantesLabel(data.palestrantes)}}</h2>
             <p>{{data.titulo}}</p>
