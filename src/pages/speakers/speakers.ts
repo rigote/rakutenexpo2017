@@ -69,11 +69,12 @@ export class Speakers {
             key: trilha,
             canal: this.dataTrilha[trilha].canal,
             nome: this.dataTrilha[trilha].nome,
-            alias: this.dataTrilha[trilha].alias
+            alias: this.dataTrilha[trilha].alias,
+            index: this.dataTrilha[trilha].index
           });   
         }
 
-        this._trilhas = result;
+        this._trilhas = _.orderBy(result, ['index'], ['asc'])
         this.trilhas = this._trilhas[0].alias;
 
         break;
