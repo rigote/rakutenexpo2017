@@ -14,9 +14,12 @@
     <div class="dadosWifi" [hidden]="!content.ssid || !content.senha">
       <h4>Dados de Wi-Fi</h4>
       <p>
-        <span><ion-icon name="wifi"></ion-icon> {{content.ssid}}</span><br>
-        <span><ion-icon name="key"></ion-icon> {{content.senha}}</span>
+        <span><ion-icon name="wifi"></ion-icon> <b>{{content.ssid}}</b></span><br>
+        <span><ion-icon name="key"></ion-icon> <b>{{content.senha}}</b></span>
       </p>
+    </div>
+    <div class="register">
+      <button ion-button block color="rakuten" onClick="window.open('https://automacaodeeventos.com.br/rakuten2017/sis/inscricao/index.asp', '_system');">PARTICIPE</button>
     </div>
   </div>
 </ion-content>
