@@ -2,6 +2,9 @@
 page-schedule {
   ion-list {
     ion-item {
+      p{
+        white-space: normal;
+      }
       padding-left: 0 !important;
       .item-inner{
         padding-right: 0 !important;

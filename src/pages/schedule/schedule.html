@@ -17,6 +17,7 @@
       </ion-item-divider>
       <ion-item *ngFor="let data of getLecturesByTime(item); let index = index">
         <img [hidden]="data.keynote != 1" src="{{getFotoPalestrantes(data.palestrantes)}}" alt="">
+        <p [hidden]="data.keynote != 1">{{data.titulo}}</p>
         <ion-thumbnail item-start *ngIf="data.trilhaID != ''" [hidden]="data.keynote == 1">
           <img src="{{getFotoPalestrantes(data.palestrantes)}}">
         </ion-thumbnail>
