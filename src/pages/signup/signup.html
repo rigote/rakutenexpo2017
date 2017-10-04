@@ -16,10 +16,10 @@
             </ion-item>
             <ion-item>
               <ion-icon name="lock" item-left light small></ion-icon>
-              <ion-input type="password" placeholder="Senha" maxlength="20" formControlName="password"></ion-input>
+              <ion-input type="password" placeholder="Senha" minlength="6" maxlength="20" formControlName="password"></ion-input>
             </ion-item>
           </ion-list>
-          <button ion-button block color="barcelona" (click)="submit()">Cadastrar</button>
+          <button ion-button block color="barcelona" (click)="submit()" [disabled]="!form.valid">Cadastrar</button>
         </form>
         <p text-center>Já tem cadastro?&nbsp;<strong (click)="goToLogin()">Faça login.</strong></p>
       </ion-col>

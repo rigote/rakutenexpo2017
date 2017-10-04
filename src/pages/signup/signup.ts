@@ -62,8 +62,8 @@ export class Signup {
       .catch(() => {
         loader.dismiss();
         let alert = this.alertCtrl.create({
-          title: 'Ops, algo deu errado!',
-          subTitle: 'Não foi possível realizar seu cadastro.',
+          title: 'Cadastro inválido!',
+          subTitle: 'Insira um e-mail válido e uma senha com no mínimo 6 caracteres.',
           buttons: ['OK']
         });
         alert.present();
