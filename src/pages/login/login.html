@@ -9,6 +9,7 @@
           </h1>
           <br><br>
           <ion-list no-lines>
+            <p text-center>Informe e-mail e senha para efetuar login</p>
             <ion-item>
               <ion-icon name="mail" item-left light small></ion-icon>
               <ion-input type="email" placeholder="E-mail" maxlength="140" formControlName="email"></ion-input>
@@ -17,6 +18,7 @@
               <ion-icon name="lock" item-left light small></ion-icon>
               <ion-input type="password" placeholder="Senha" maxlength="20" formControlName="password"></ion-input>
             </ion-item>
+            <small text-right>Ainda não tem cadastro?&nbsp;<strong (click)="goToSignup()">Cadastre-se</strong></small>
           </ion-list>
           <button ion-button block color="barcelona" (click)="submit()" [disabled]="!form.valid">Entrar</button>
           <small text-center>ou se logue com:</small>
@@ -29,7 +31,7 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar text-center barcelona>
     <ion-buttons>
       <button small ion-button block (click)="goToSignup()">
@@ -37,4 +39,4 @@
         </button>
     </ion-buttons>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

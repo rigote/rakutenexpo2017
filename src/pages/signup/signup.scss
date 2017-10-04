@@ -18,11 +18,11 @@ page-signup {
                     text-shadow: $text-shadow !important;
                 }
             }
-            small{
+            p,small{
                 width: 100%;
                 color: #FFF;
                 display: inline-block;
-                margin: 2px 0;
+                margin: 5px 0;
                 text-shadow: $text-shadow;
             }
             .socialLogin{
